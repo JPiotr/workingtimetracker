@@ -14,8 +14,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "workingtimetracker.helloWorld",
-        "title": "Hello World"
+        "command": "workingtimetracker.start",
+        "title": "Start",
+        "category": "Working Time Tracker"
+      },
+      {
+        "command": "workingtimetracker.end",
+        "title": "Stop",
+        "category": "Working Time Tracker"
+      },
+      {
+        "command": "workingtimetracker.idle",
+        "title": "Idle",
+        "category": "Working Time Tracker"
       }
     ]
   },
@@ -31,17 +42,19 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.92.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "20.x",
+    "@types/uuid": "^10.0.0",
+    "@types/vscode": "^1.92.0",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.11.0",
-    "eslint": "^8.57.0",
-    "typescript": "^5.4.5",
-    "ts-loader": "^9.5.1",
-    "webpack": "^5.92.1",
-    "webpack-cli": "^5.1.4",
     "@vscode/test-cli": "^0.0.9",
-    "@vscode/test-electron": "^2.4.0"
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^8.57.0",
+    "rxjs": "^7.8.1",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4"
   }
 }
