@@ -1,11 +1,10 @@
 
 export enum ActionType {
-    Idle,
-    Codding,
-    Debugging,
-    Projecting,
-    Documenting,
-    Testing,
-    Stop,
-    Building
+    Idle = "Idle",
+    Codding = "Codding",
+    Debugging = "Debugging",
+    Documenting = "Documenting",
+    Testing = "Testing",
+    Stop = "Stop",
+    Building = "Building"
 }
