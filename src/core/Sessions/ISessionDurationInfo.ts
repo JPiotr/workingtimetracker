@@ -1,7 +1,7 @@
 
 export interface ISessionDurationInfo {
     id: string;
-    begin: number;
-    end: number;
+    begin: number | string;
+    end: number | string;
     duration: number;
 }
