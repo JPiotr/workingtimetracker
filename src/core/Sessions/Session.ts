@@ -5,17 +5,19 @@ import { SessionDuration } from "./SessionDuration";
 import { SessionState } from "./SessionState";
 
 
-export class Session{
+export class Session {
     private _sessionsChain! : Node<SessionDuration>;
+    private _id : string;
     private _newSession : boolean;
     private _idleTime = 0;
     sessionState : SessionState = SessionState.Idle;
     
     constructor() {    
+        this._id = crypto.randomUUID();
         this._newSession = true;
     }
 
-    start() : void{
+    start() : void {
         if(this.sessionState !== SessionState.Ongoing){
             this.saveIdleTime();
             this.createNewSessionDuration();
@@ -24,7 +26,7 @@ export class Session{
         }
     }
 
-    idle() : void{
+    idle() : void {
         if(this.sessionState === SessionState.Ongoing && !this._newSession){
             this._sessionsChain.current.end();
             this.createNewSessionDuration();
@@ -32,7 +34,7 @@ export class Session{
         }
     }
     
-    end() : void{
+    end() : void {
         this.saveIdleTime();
         if(this.sessionState !== SessionState.Ended && !this._newSession){
             this._sessionsChain.current.end();
@@ -40,20 +42,20 @@ export class Session{
         }
     }
     
-    private createNewSessionDuration() : void{
+    private createNewSessionDuration() : void {
         let session = new SessionDuration();
         session.start();
         this._sessionsChain = this._newSession ? new Node<SessionDuration>(session) : new Node<SessionDuration>(session, this._sessionsChain);
     }
 
-    private saveIdleTime(){
+    private saveIdleTime() : void {
         if(this.sessionState === SessionState.Idle && !this._newSession){
             this._idleTime += this._sessionsChain.current.getCurrentDuration();
         }
     }
 
     //it should get the sumarize session duration time.
-    getSessionDuration(withIdle : boolean) : number{
+    getSessionDuration(withIdle : boolean) : number {
         let node : Node<SessionDuration>  = this._sessionsChain;
         let duration = 0;
 
@@ -69,7 +71,6 @@ export class Session{
                 duration += withIdle ? node.current.getCurrentDuration() : 0;
                 break;
             case SessionState.Ended: 
-                // duration = node.current.getDuration();
                 break;
         }
 
@@ -80,45 +81,31 @@ export class Session{
         return withIdle ? duration + this._idleTime : duration;
     }
 
-    getSessionIdleDuration(){
+    getSessionIdleDuration() : number {
         return this._idleTime;
     }
 
     getSessionInfo(withIdle : boolean) : ISessionInfo {
-        return {
-            duration : this.getSessionDuration(withIdle),
-            state : this.sessionState
-        };
-    }
-
-    getSessionDetailInfo(withIdle : boolean){
         let durations : ISessionDurationInfo[] = [];
         let node : Node<SessionDuration> = this._sessionsChain;
-        while(node.previous !== null){
-            node = node.previous;
+        if(!this._newSession){
             durations.push(node.current.getInfo());
+            while(node.previous !== null){
+                node = node.previous;
+                durations.push(node.current.getInfo());
+            }
         }
         return {
-            sessionInfo : this.getSessionInfo(withIdle),
-            sessionDurations : durations
+            id : this._id,
+            duration : this.getSessionDuration(withIdle),
+            state : this.sessionState,
+            durations : durations
         };
     }
-    
-    static convertSessionDuration(duration : number) : string {
-        let seconds = Math.floor(duration / 1000);
-        let minutes = Math.floor(seconds / 60);
-        let hoours = Math.floor(minutes / 60);
 
-        seconds = seconds % 60;
-        minutes = minutes % 60;
-
-        return Session.padTo2Digits(hoours) + ":" + Session.padTo2Digits(minutes) + ":" + Session.padTo2Digits(seconds);
+    isNewSession() : boolean {
+        return this._newSession;
     }
-
-    private static padTo2Digits(num : number) : string {
-        return num.toString().padStart(2, '0');
-    }
-
 }
 
 
