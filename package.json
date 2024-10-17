@@ -73,16 +73,6 @@
         "command": "workingtimetracker.idle",
         "title": "Idle",
         "category": "Working Time Tracker"
-      },
-      {
-        "command": "workingtimetracker.test",
-        "title": "Test",
-        "category": "ExtTest"
-      },
-      {
-        "command": "workingtimetracker.test1",
-        "title": "Test1",
-        "category": "ExtTest"
       }
     ]
   },

@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { COMMAND_IDLE, COMMAND_START, COMMAND_STOP, COMMAND_TEST, COMMAND_TEST1 } from './config/Config';
+import { COMMAND_IDLE, COMMAND_START, COMMAND_STOP } from './config/Config';
 import { ActionType } from "./core/ActionType";
 import { interval, Subscription } from "rxjs";
 import { SessionManager } from './core/Sessions/SessionManager';
@@ -35,12 +35,6 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand(COMMAND_IDLE, ()=>{
 			SessionManager.getInstance().menageSession(ActionType.Idle);
 			newly = false;
-		}),
-		vscode.commands.registerCommand(COMMAND_TEST, ()=>{
-			DataStorageManager.getInstance().saveData();
-		}),
-		vscode.commands.registerCommand(COMMAND_TEST1, ()=>{
-			DataStorageManager.getInstance().loadData();
 		}),
 		...BehaviorDetector.getInstance().detectCodding(),
 		...BehaviorDetector.getInstance().detectDebuging(),
