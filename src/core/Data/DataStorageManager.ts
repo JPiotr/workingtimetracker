@@ -79,6 +79,15 @@ export class DataStorageManager implements IDataStorage{
         if(flag){
             vscode.window.showErrorMessage("There is no workspace opened!");
         }
+        
+        vscode.workspace.fs.stat(vscode.Uri.parse(this.filePath)).then(
+            ()=>{
+                return !flag;
+            },
+            ()=>{
+                vscode.workspace.fs.writeFile(vscode.Uri.parse(this.filePath),Buffer.from(""));
+            }
+        );
         return !flag;
     }
     private findUserDataInfo() : IUserData | undefined{

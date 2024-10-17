@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { COMMAND_IDLE, COMMAND_START, COMMAND_STOP } from './config/Config';
+import { COMMAND_IDLE, COMMAND_SAVE, COMMAND_START, COMMAND_STOP } from './config/Config';
 import { ActionType } from "./core/ActionType";
 import { interval, Subscription } from "rxjs";
 import { SessionManager } from './core/Sessions/SessionManager';
@@ -8,7 +8,7 @@ import { convertTimeToString } from './static/Utils';
 import { DataStorageManager } from './core/Data/DataStorageManager';
 import { BehaviorDetector } from './core/Behavior/BehaviorDetector';
 
-const config = vscode.workspace.getConfiguration('workingtimetracker');
+let config = vscode.workspace.getConfiguration('workingtimetracker');
 const ticks = interval(config.innerSessions.uiRefreshTime);
 const autoSave = interval(config.innerSessions.autoSaveTime);
 const idle = interval(config.innerSessions.idleTime);
@@ -35,6 +35,9 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand(COMMAND_IDLE, ()=>{
 			SessionManager.getInstance().menageSession(ActionType.Idle);
 			newly = false;
+		}),
+		vscode.commands.registerCommand(COMMAND_SAVE, ()=>{
+			DataStorageManager.getInstance().saveData();
 		}),
 		...BehaviorDetector.getInstance().detectCodding(),
 		...BehaviorDetector.getInstance().detectDebuging(),
@@ -67,6 +70,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 function updateStatusBarItem() : void {
+	config = vscode.workspace.getConfiguration('workingtimetracker');
 	if(BehaviorDetector.getInstance().isDetectedNewAction()){
 		newly = false;
 	}
