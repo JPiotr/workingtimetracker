@@ -4,100 +4,131 @@ import { Session } from "./Session";
 import * as vscode from "vscode";
 
 export class SessionManager {
-    private static instance: SessionManager;
-    private currentSession: Session;
-    private oldSession!: Session;
-    private currentAction: ActionType = ActionType.Idle;
-    private managedSessions : ISessionDataRow[] = [];
-    private registerIdle = vscode.workspace.getConfiguration('workingtimetracker').innerSessions.registerIdle;
-    
-    static getInstance(): SessionManager {
-        if (this.instance === undefined) {
-            this.instance = new SessionManager();
-        }
-        return this.instance;
+  private static instance: SessionManager;
+  private currentSession: Session;
+  private oldSession!: Session;
+  private currentAction: ActionType = ActionType.Idle;
+  private managedSessions: ISessionDataRow[] = [];
+  private static registerIdle =
+    vscode.workspace.getConfiguration("workingtimetracker").innerSessions
+      .registerIdle;
+
+  static getInstance(): SessionManager {
+    if (this.instance === undefined) {
+      this.instance = new SessionManager();
     }
-    private constructor() {
-        this.currentSession = new Session();
-    }
-    menageSession(actionType: ActionType): ISessionDataRow {
-        switch (actionType) {
-            case ActionType.Codding:
-            case ActionType.Debugging:
-            case ActionType.Documenting:
-            case ActionType.Building:
-            case ActionType.Testing:
-                this.createNewSession(actionType);
-                this.currentSession.start();
-                return {
-                    actionType: this.currentAction,
-                    sessionInfo: this.currentSession.getSessionInfo(this.registerIdle)
-                };
-            case ActionType.Idle:
-                this.currentSession.idle();
-                this.currentAction = actionType;
-                return {
-                    actionType: this.currentAction,
-                    sessionInfo: this.currentSession.getSessionInfo(this.registerIdle)
-                };
-            case ActionType.Stop:
-                this.currentSession.end();
-                this.saveSession();
-                this.oldSession = this.currentSession;
-                this.currentSession = new Session();
-                this.currentAction = actionType;
-                return {
-                    actionType: this.currentAction,
-                    sessionInfo: this.oldSession.getSessionInfo(this.registerIdle)
-                };
-        }
-    }
-    getSessionInfo(): ISessionDataRow {
-        if (this.oldSession !== undefined && this.currentAction === ActionType.Stop) {
-            return {
-                sessionInfo: this.oldSession.getSessionInfo(this.registerIdle),
-                actionType: this.currentAction
-            };
-        }
+    this.registerIdle =
+      vscode.workspace.getConfiguration(
+        "workingtimetracker"
+      ).innerSessions.registerIdle;
+    return this.instance;
+  }
+  private constructor() {
+    this.currentSession = new Session();
+  }
+  menageSession(actionType: ActionType): ISessionDataRow {
+    switch (actionType) {
+      case ActionType.Codding:
+      case ActionType.Debugging:
+      case ActionType.Documenting:
+      case ActionType.Building:
+      case ActionType.Testing:
+        this.createNewSession(actionType);
+        this.currentSession.start();
         return {
-            sessionInfo: this.currentSession.getSessionInfo(this.registerIdle),
-            actionType: this.currentAction
+          actionType: this.currentAction,
+          sessionInfo: this.currentSession.getSessionInfo(
+            SessionManager.registerIdle
+          ),
+        };
+      case ActionType.Idle:
+        this.currentSession.idle();
+        this.currentAction = actionType;
+        return {
+          actionType: this.currentAction,
+          sessionInfo: this.currentSession.getSessionInfo(
+            SessionManager.registerIdle
+          ),
+        };
+      case ActionType.Stop:
+        this.currentSession.end();
+        this.saveSession();
+        this.oldSession = this.currentSession;
+        this.currentSession = new Session();
+        this.currentAction = actionType;
+        return {
+          actionType: this.currentAction,
+          sessionInfo: this.oldSession.getSessionInfo(
+            SessionManager.registerIdle
+          ),
         };
     }
-    getCurrentlyManagedSessions() : ISessionDataRow[] {
-        return [...this.getManagedSessions(), {
-            sessionInfo : this.currentSession.getSessionInfo(this.registerIdle),
-            actionType : this.currentAction
-        }];
+  }
+  getSessionInfo(): ISessionDataRow {
+    if (
+      this.oldSession !== undefined &&
+      this.currentAction === ActionType.Stop
+    ) {
+      return {
+        sessionInfo: this.oldSession.getSessionInfo(
+          SessionManager.registerIdle
+        ),
+        actionType: this.currentAction,
+      };
     }
-    loadManagedSessions(sessions : ISessionDataRow[]) : void{
-        if(!sessions.every(x=>x.sessionInfo.durations.length !== 0)){
-            sessions = sessions.filter(x=>x.sessionInfo.durations.length !== 0);
-        }
-        if(sessions.length > 0 && sessions[sessions.length-1].actionType !== ActionType.Stop){
-            let lastNotStoppedSession = sessions[sessions.length-1];
-            lastNotStoppedSession.actionType = ActionType.Stop;
-        }
-        this.managedSessions = sessions;
-
+    return {
+      sessionInfo: this.currentSession.getSessionInfo(
+        SessionManager.registerIdle
+      ),
+      actionType: this.currentAction,
+    };
+  }
+  getCurrentlyManagedSessions(): ISessionDataRow[] {
+    return [
+      ...this.getManagedSessions(),
+      {
+        sessionInfo: this.currentSession.getSessionInfo(
+          SessionManager.registerIdle
+        ),
+        actionType: this.currentAction,
+      },
+    ];
+  }
+  loadManagedSessions(sessions: ISessionDataRow[]): void {
+    if (!sessions.every((x) => x.sessionInfo.durations.length !== 0)) {
+      sessions = sessions.filter((x) => x.sessionInfo.durations.length !== 0);
     }
-    private getManagedSessions() : ISessionDataRow[] {
-        return this.managedSessions;
+    if (
+      sessions.length > 0 &&
+      sessions[sessions.length - 1].actionType !== ActionType.Stop
+    ) {
+      const lastNotStoppedSession = sessions[sessions.length - 1];
+      lastNotStoppedSession.actionType = ActionType.Stop;
     }
-    private createNewSession(actionType : ActionType) : void {
-        if(actionType !== this.currentAction && !this.currentSession.isNewSession() && this.currentAction !== ActionType.Idle){
-            this.saveSession();
-            this.currentAction = actionType;
-            this.currentSession.end();
-            this.currentSession = new Session();
-        }
-        this.currentAction = actionType;
-        
+    this.managedSessions = sessions;
+  }
+  private getManagedSessions(): ISessionDataRow[] {
+    return this.managedSessions;
+  }
+  private createNewSession(actionType: ActionType): void {
+    if (
+      actionType !== this.currentAction &&
+      !this.currentSession.isNewSession() &&
+      this.currentAction !== ActionType.Idle
+    ) {
+      this.saveSession();
+      this.currentAction = actionType;
+      this.currentSession.end();
+      this.currentSession = new Session();
     }
-    private saveSession() : void {
-        this.managedSessions.push({
-            sessionInfo : this.currentSession.getSessionInfo(this.registerIdle),
-            actionType : this.currentAction
-        });
-    }
+    this.currentAction = actionType;
+  }
+  private saveSession(): void {
+    this.managedSessions.push({
+      sessionInfo: this.currentSession.getSessionInfo(
+        SessionManager.registerIdle
+      ),
+      actionType: this.currentAction,
+    });
+  }
 }
