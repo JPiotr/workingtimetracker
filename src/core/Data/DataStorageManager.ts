@@ -1,15 +1,19 @@
 import * as vscode from "vscode";
 import { IData } from "../IData";
-import { userInfo } from "os";
 import { SessionManager } from "../Sessions/SessionManager";
 import { IDataStorage } from "./IDataStorage";
 import { IUserData } from "../IUserData";
 import { IDailySessions } from "../IDaylySessions";
+import { UserInfoGetter } from "./UserInfoGetter";
 
 export class DataStorageManager implements IDataStorage {
-  private currentUser = userInfo().username;
+  private userInfoGetter = new UserInfoGetter();
+  private currentUser: string = this.userInfoGetter.username;
   private static instance: DataStorageManager;
-  private today: string = Date.now().toLocaleString();
+  private today: string = new Date(Date.now()).toLocaleString(
+    Intl.Locale.name,
+    { day: "numeric", month: "numeric", year: "numeric" }
+  );
   private filePath: string = "";
   private storage: IData = {
     data: [],
@@ -23,6 +27,9 @@ export class DataStorageManager implements IDataStorage {
   private constructor() {
     const wFolders = vscode.workspace.workspaceFolders;
     if (wFolders !== undefined) {
+      this.userInfoGetter.getUsername().then((fullfilled)=>{
+        this.currentUser = fullfilled;
+      });
       this.filePath = vscode.Uri.joinPath(
         wFolders[0].uri,
         vscode.workspace.getConfiguration("workingtimetracker").fileName
@@ -30,11 +37,12 @@ export class DataStorageManager implements IDataStorage {
       this.loadData();
     }
   }
-  loadData(): void {
+  async loadData(): Promise<void> {
     if (this.checkFilePath()) {
       vscode.workspace.fs.readFile(vscode.Uri.parse(this.filePath)).then(
-        (value: Uint8Array) => {
+        async (value: Uint8Array) => {
           this.storage = JSON.parse(Buffer.from(value).toString("utf-8"));
+          await this.userInfoGetter.getUsername();
           const data = this.findUserDataInfo();
           if (data !== undefined) {
             const currentData = this.findTodaysSessions(data);
@@ -43,7 +51,7 @@ export class DataStorageManager implements IDataStorage {
                 currentData.sessions
               );
               vscode.window.showInformationMessage(
-                `Data for ${this.today} loaded succesfully.`
+                `Data for ${this.today} loaded succesfully for user ${this.currentUser}.`
               );
             }
             vscode.window.showInformationMessage(
