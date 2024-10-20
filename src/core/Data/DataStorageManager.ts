@@ -38,7 +38,7 @@ export class DataStorageManager implements IDataStorage {
     }
   }
   async loadData(): Promise<void> {
-    if (this.checkFilePath()) {
+    if (await this.checkFilePath()) {
       vscode.workspace.fs.readFile(vscode.Uri.parse(this.filePath)).then(
         async (value: Uint8Array) => {
           this.storage = JSON.parse(Buffer.from(value).toString("utf-8"));
@@ -65,9 +65,9 @@ export class DataStorageManager implements IDataStorage {
       );
     }
   }
-  saveData(): boolean {
+  async saveData() {
     this.collectData();
-    if (this.checkFilePath()) {
+    if (await this.checkFilePath()) {
       vscode.workspace.fs
         .writeFile(
           vscode.Uri.parse(this.filePath),
@@ -81,9 +81,7 @@ export class DataStorageManager implements IDataStorage {
             vscode.window.showErrorMessage(`Cannot save data: ${reason}`);
           }
         );
-      return true;
     }
-    return false;
   }
   private collectData(): void {
     const data = this.findUserDataInfo();
@@ -111,17 +109,18 @@ export class DataStorageManager implements IDataStorage {
       });
     }
   }
-  private checkFilePath(): boolean {
+  private async checkFilePath(): Promise<boolean> {
     const flag: boolean = this.filePath === "";
     if (flag) {
       vscode.window.showErrorMessage("There is no workspace opened!");
       return !flag;
     }
-    vscode.workspace.fs.stat(vscode.Uri.parse(this.filePath)).then(
+    await vscode.workspace.fs.stat(vscode.Uri.parse(this.filePath)).then(
       () => {
         return !flag;
       },
       () => {
+        vscode.window.showInformationMessage("There is no reqired file, creating new.")
         vscode.workspace.fs.writeFile(
           vscode.Uri.parse(this.filePath),
           Buffer.from("")

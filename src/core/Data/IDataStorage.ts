@@ -1,4 +1,4 @@
 export interface IDataStorage {
-    loadData(): void;
-    saveData(): boolean;
+    loadData(): Promise<void>;
+    saveData() : Promise<void>;
 }
