@@ -1,42 +1,48 @@
 import assert from "assert";
 import { Session } from "../../core/Sessions/Session";
 import { SessionState } from "../../core/Sessions/SessionState";
+import { afterEach, beforeEach } from "mocha";
 
-suite('Session Tests', ()=>{
-    let session : Session = new Session();
-    test('Session is new',()=>{
-        assert.strictEqual(session.isNewSession(), true);
+suite(`Session`, () => {
+  test(`Should create new session`, () => {
+    const session: Session = new Session();
+    assert.equal(session.isNewSession(), true);
+  });
+  suite(`Session durations`, () => {
+    const session: Session = new Session();
+    test(`Should return idle time`, () => {
+      session.start();
+      session.idle();
+      setTimeout(() => {
+        assert.equal(session.getSessionIdleDuration() >= 1000, 1000);
+      }, 1000);
     });
-    test('Session is not new',()=>{
-        session.start();
-        assert.notStrictEqual(session.isNewSession(), true);
-        session.end();
+    test(`Should contains 3 durations`, () => {
+      session.start();
+      session.idle();
+      session.start();
+      session.end();
+      assert.equal(session.getSessionInfo(false).durations.length, 5);
     });
-});
-suite('Session States Tests',()=>{
-    let session : Session = new Session();
-    test('Session not started',()=>{
-        assert.strictEqual(session.sessionState === SessionState.Idle && session.isNewSession(), true);
+  });
+  suite(`Session processes`, () => {
+    const session: Session = new Session();
+    afterEach(() => {
+      session.end();
     });
-    test('Session is ongoing',()=>{
-        session.start();
-        assert.strictEqual(session.sessionState, SessionState.Ongoing);
+    beforeEach(() => {
+      session.start();
     });
-    test('Session is idle',()=>{
-        session.idle();
-        assert.strictEqual(session.sessionState, SessionState.Idle);
+    test(`Session started`, () => {
+      assert.equal(session.sessionState, SessionState.Ongoing);
     });
-    test('Session is not idle after started',()=>{
-        session.start();
-        assert.notStrictEqual(session.sessionState, SessionState.Idle);    
+    test(`Session is idle`, () => {
+      session.idle();
+      assert.equal(session.sessionState, SessionState.Idle);
     });
-    test('Session is ended',()=>{
-        session.end();
-        assert.strictEqual(session.sessionState, SessionState.Ended);    
+    test(`Session ended`, () => {
+      session.end();
+      assert.equal(session.sessionState, SessionState.Ended);
     });
-    test('Session started after ended',()=>{
-        session.start();
-        assert.strictEqual(session.sessionState, SessionState.Ongoing);    
-        session.end();
-    });
+  });
 });
