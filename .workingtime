@@ -1,0 +1,771 @@
+{
+    "data": [
+        {
+            "user": "JPiotr",
+            "daylySessions": [
+                {
+                    "date": "10/20/2024",
+                    "sessions": [
+                        {
+                            "sessionInfo": {
+                                "id": "33d3564a-6934-42a6-8708-ccfd0049fa5a",
+                                "duration": 1125147,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "5fed115f-40af-4aa5-8ee3-00645d958eb2",
+                                        "begin": 1729445333992,
+                                        "end": 1729445333992,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "2c03711f-c36c-40f3-8dc6-84c576baa9f7",
+                                        "begin": 1729444797435,
+                                        "end": 1729444797435,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "5ee39d4c-52db-407a-8f02-0f2fbaf7b666",
+                                        "begin": 1729444246810,
+                                        "end": 1729444797435,
+                                        "duration": 550625
+                                    },
+                                    {
+                                        "id": "25ee0571-775c-4925-a312-2406ce81b386",
+                                        "begin": 1729444226703,
+                                        "end": 1729444226703,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "bf322dae-184c-4876-a3e5-659a4085892c",
+                                        "begin": 1729444208884,
+                                        "end": 1729444226703,
+                                        "duration": 17819
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "01d4d4e0-9bcf-4980-a9a4-a95008501369",
+                                "duration": 248556,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "ce060118-c609-4fb6-bbdf-8888f1238942",
+                                        "begin": 1729445334031,
+                                        "end": 1729445334031,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "bf9c37e2-96f9-42ed-9ba1-1d1da9eea16d",
+                                "duration": 6300,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "6a0560ea-66de-4e23-b17b-e65e4c3c84ec",
+                                        "begin": 1729445582588,
+                                        "end": 1729445582588,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "c405d17b-49aa-4e25-9816-6d40e6a75de3",
+                                "duration": 1535,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "a2f465b9-69b2-49ae-9f27-fa371f7ea22a",
+                                        "begin": 1729445588888,
+                                        "end": 1729445588888,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "d9ba4591-06ad-424b-ae94-14e80b8f896a",
+                                "duration": 17,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "f1c21b2e-0d3f-4440-a31c-8e33f69fe524",
+                                        "begin": 1729445590423,
+                                        "end": 1729445590423,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "22f4dcde-f559-4c83-bc2b-a74411f91092",
+                                "duration": 7,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "5343e0a3-b868-4a68-a970-17c876f4e712",
+                                        "begin": 1729445590440,
+                                        "end": 1729445590440,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "95af2bd0-9196-4788-9c33-e38efa54466c",
+                                "duration": 5534,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "d59b82b6-7752-40ee-8da6-99e07eb6628e",
+                                        "begin": 1729445590447,
+                                        "end": 1729445590447,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "846a0013-b463-46b9-8cb4-a67277fbc0d5",
+                                "duration": 49075,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "709f1620-ae88-4eba-9a41-6c341222e81d",
+                                        "begin": 1729445595981,
+                                        "end": 1729445595981,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "f656445a-61f5-495f-984a-5ce3ab90c880",
+                                "duration": 2140,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "626cc9d7-03b1-4dea-be3b-9cc37ddd102e",
+                                        "begin": 1729445645056,
+                                        "end": 1729445645056,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "c7c1182a-34ee-4619-84e9-ad697935936e",
+                                "duration": 130113,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "9ac25b52-478d-4173-8789-f775747735e2",
+                                        "begin": 1729445647197,
+                                        "end": 1729445647197,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "d1bd7005-ce13-482f-953c-6948776fc9f9",
+                                "duration": 10609,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "ce357bb2-e8c6-4d87-a771-b13d4caa9f72",
+                                        "begin": 1729445777311,
+                                        "end": 1729445777311,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "41d8599b-fc5e-4b72-a287-6a3097d11328",
+                                "duration": 686723,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "53a84ee5-ce42-4baa-b252-73bed51ed6b7",
+                                        "begin": 1729446298836,
+                                        "end": 1729446298836,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "83041641-60a1-462c-8795-0ce86146c764",
+                                        "begin": 1729446297474,
+                                        "end": 1729446297474,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "9a34e2f4-fe90-4b60-8e35-441904980674",
+                                        "begin": 1729445787920,
+                                        "end": 1729446297474,
+                                        "duration": 509554
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "56c4a199-7ffd-42fb-b853-f17f4cbe7f82",
+                                "duration": 37,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "d2f9e5a9-336d-4872-880f-8527e0817408",
+                                        "begin": 1729446474643,
+                                        "end": 1729446474643,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "2e7ba857-e624-4fc8-9713-6a2a03724f79",
+                                "duration": 64825,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "762dbc19-ac70-455d-97b7-adddeb46f050",
+                                        "begin": 1729446494106,
+                                        "end": 1729446494106,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "ab112795-6f27-4363-89bc-eb00d671bf56",
+                                        "begin": 1729446478572,
+                                        "end": 1729446478572,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "ee8d6979-00e2-4a0d-abab-3d2b5efca0d5",
+                                        "begin": 1729446474680,
+                                        "end": 1729446478572,
+                                        "duration": 3892
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "dad71cde-90de-46ae-b240-5be86148aa70",
+                                "duration": 6235,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "0c46b2f8-a1a8-4216-9f7e-18139071a241",
+                                        "begin": 1729446539505,
+                                        "end": 1729446539505,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "896b9ab3-0309-4898-9a45-d76459455b33",
+                                "duration": 251231,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "043f0f0d-ec83-4095-b656-95bbcb291d20",
+                                        "begin": 1729446545740,
+                                        "end": 1729446545740,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "990a793c-a2bc-4d80-8773-be6800b991e8",
+                                "duration": 18,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "0ba0c451-77bc-4bc2-987f-32626818295e",
+                                        "begin": 1729446796971,
+                                        "end": 1729446796971,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "30eff540-a0be-4fb9-82a6-282e217422cd",
+                                "duration": 2193,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "b2fc6683-a37c-4428-acb0-ad733c941b10",
+                                        "begin": 1729446796989,
+                                        "end": 1729446796989,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "72bf9315-96bd-48d3-8189-1590fb4a77a8",
+                                "duration": 97385,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "cb2e465b-ce55-4cbe-bf3e-f3eb80573583",
+                                        "begin": 1729446799182,
+                                        "end": 1729446799182,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "75fc8aed-caca-444d-a769-6cb53b195933",
+                                "duration": 26643,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "e0623de7-0113-4bf5-9c7b-6fa92678ca82",
+                                        "begin": 1729446896567,
+                                        "end": 1729446896567,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "d097b79d-ae8f-454e-b751-3989badbe248",
+                                "duration": 125766,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "0205a793-72a4-4f96-9c13-04e8857df2a2",
+                                        "begin": 1729447018465,
+                                        "end": 1729447018465,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "5264d7df-df8a-4019-b9c3-704d698abc3c",
+                                        "begin": 1729446949136,
+                                        "end": 1729446949136,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "77b1fd93-aadd-4dfc-a056-4d711aafa4f3",
+                                        "begin": 1729446923210,
+                                        "end": 1729446949136,
+                                        "duration": 25926
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "a6164be5-37dc-4e51-9c35-983864ef2628",
+                                "duration": 16269,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "8229cb68-01f3-4435-a660-925b407a63de",
+                                        "begin": 1729447048976,
+                                        "end": 1729447048976,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "3efcb5a3-3e60-4296-ab9f-126ed85fb1f5",
+                                "duration": 5943,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "5404303b-df05-45fc-a245-c9a47d8ee4ef",
+                                        "begin": 1729447065245,
+                                        "end": 1729447065245,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "4f8769aa-f56a-471c-a90a-51fdb32ec8b0",
+                                "duration": 63,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "ae05dd94-b0e5-493c-8581-f607f6655790",
+                                        "begin": 1729447071188,
+                                        "end": 1729447071188,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "99e8a24f-48a1-430d-acba-4ebbeca0adc8",
+                                "duration": 6367,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "61b3bbcb-a330-44d0-a5e3-3c87e5f71e24",
+                                        "begin": 1729447071251,
+                                        "end": 1729447071251,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "638b34d0-533e-45a2-90e0-709a6adcd79c",
+                                "duration": 18,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "dea418d8-0ea3-4f2a-ad93-9a751eab8b5a",
+                                        "begin": 1729447077618,
+                                        "end": 1729447077618,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "04c963ac-0f9e-4f7b-9817-4e75239c4320",
+                                "duration": 10743,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "5449cb15-5b75-46e5-9cc2-5f02606f96a4",
+                                        "begin": 1729447077636,
+                                        "end": 1729447077636,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "0c55aa20-66d1-45ec-9bf1-69c8d9dc67ad",
+                                "duration": 64,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "cde6fcde-5c52-4111-8192-8549da89ee4f",
+                                        "begin": 1729447088379,
+                                        "end": 1729447088379,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "1832554d-dfa8-4cb2-811c-bd748b92dd81",
+                                "duration": 4856,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "526aa9ee-05bd-4066-a656-0daf6c58a596",
+                                        "begin": 1729447088443,
+                                        "end": 1729447088443,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "29ab6bfa-c34e-404e-84fc-389737fe99e3",
+                                "duration": 40,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "f0035294-b397-43dc-8b79-42423a687f5f",
+                                        "begin": 1729447093299,
+                                        "end": 1729447093299,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "92fa8634-bf21-42c3-91d8-08828ff5aafc",
+                                "duration": 5602,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "a7d3bc98-b852-420b-9e98-14c9f7d32607",
+                                        "begin": 1729447093339,
+                                        "end": 1729447093339,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "1617d430-4139-4669-b59e-2e37c4f81ccb",
+                                "duration": 61,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "c79fb2f7-c88e-4af8-bf42-c95b71b563d6",
+                                        "begin": 1729447098941,
+                                        "end": 1729447098941,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "a3870b6c-b0f4-4ebd-842f-a41d039ef016",
+                                "duration": 1078,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "52010921-fe3f-475d-b5f8-bbdbf7ba99f3",
+                                        "begin": 1729447099002,
+                                        "end": 1729447099002,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "32c610bb-d439-4480-91e1-e32d7c97719b",
+                                "duration": 40,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "9bdfc100-ed2c-4760-bf45-1deb7134accd",
+                                        "begin": 1729447100080,
+                                        "end": 1729447100080,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "20d82e5b-cc02-44c2-90cf-c0ce0b3db313",
+                                "duration": 23356,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "517ceeff-5594-46f9-9e13-550ca6ad4334",
+                                        "begin": 1729447100120,
+                                        "end": 1729447100120,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "2e5dc489-7dc3-4ca0-99e9-b52ade543a6f",
+                                "duration": 3818,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "3b7957a4-98a1-4630-b2a3-df45c3cbdf0e",
+                                        "begin": 1729447123477,
+                                        "end": 1729447123477,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "cf26910d-ffab-4574-b809-bddddf4bd928",
+                                "duration": 6438,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "e22d38bf-39fa-480e-8319-cd606e266af3",
+                                        "begin": 1729447127295,
+                                        "end": 1729447127295,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "876a68c8-24c0-4fd2-9317-26f215854b5f",
+                                "duration": 23261,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "c5f3b1dd-5cb3-4a98-a21b-b3aa3b6e86b0",
+                                        "begin": 1729447133733,
+                                        "end": 1729447133733,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "c7c9b631-766f-44b0-b7c5-f7d3d638238a",
+                                "duration": 58167,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "87fd20c6-5ff4-481c-8fb3-fa8452ed39fe",
+                                        "begin": 1729447156994,
+                                        "end": 1729447156994,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "0512adcd-7051-44b1-b49a-4bfcc739f9a4",
+                                "duration": 36,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "389b8b5e-624b-4aa6-8830-c0674586afca",
+                                        "begin": 1729447215161,
+                                        "end": 1729447215161,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "e060adc5-4b48-4f21-8f60-e98a76194d98",
+                                "duration": 99934,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "58627af1-2354-42d6-a85d-0366abb26fb8",
+                                        "begin": 1729447215197,
+                                        "end": 1729447215197,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "66e3ea1a-be0f-4a27-a3c8-a30f32197ac8",
+                                "duration": 20,
+                                "state": 0,
+                                "durations": [
+                                    {
+                                        "id": "02cfa9c6-12b0-4042-85ab-fae05028627a",
+                                        "begin": 1729447315131,
+                                        "end": 1729447315131,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "2faa351f-d2f4-4396-8718-a0e89713b375",
+                                "duration": 0,
+                                "state": 2,
+                                "durations": [
+                                    {
+                                        "id": "f3bf9948-474d-4347-967d-a9c581aa9f9a",
+                                        "begin": 1729447315151,
+                                        "end": 1729447335160,
+                                        "duration": 20009
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "7c0b8d18-02d0-4af8-b8c0-dc37900fe103",
+                                "duration": 0,
+                                "state": 1,
+                                "durations": []
+                            },
+                            "actionType": "Stop"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
