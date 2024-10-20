@@ -2,8 +2,11 @@
 
 All notable changes to the "workingtimetracker" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
 ## [Unreleased]
+### Added
+- v0.0.1 - Add Sessions system
+- v0.0.1 - Add Sessions manager
+- v0.0.1 - Add Behavior detect system
+- v0.0.2 - Add Data storage system
 
-- Initial release
+## [1.0.0] - 2024 - 10 - 20
