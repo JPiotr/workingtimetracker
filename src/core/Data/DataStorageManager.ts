@@ -27,7 +27,7 @@ export class DataStorageManager implements IDataStorage {
   private constructor() {
     const wFolders = vscode.workspace.workspaceFolders;
     if (wFolders !== undefined) {
-      this.userInfoGetter.getUsername().then((fullfilled)=>{
+      this.userInfoGetter.getUsername().then((fullfilled) => {
         this.currentUser = fullfilled;
       });
       this.filePath = vscode.Uri.joinPath(
