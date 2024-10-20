@@ -1,7 +1,6 @@
-import { ISessionDataRow } from "./Sessions/ISessionDataRow";
-
+import { IDailySessions } from "./IDaylySessions";
 
 export interface IUserData {
-    user: string;
-    sessions: ISessionDataRow[];
+  user: string;
+  daylySessions: IDailySessions[];
 }
