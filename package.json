@@ -2,7 +2,7 @@
   "name": "workingtimetracker",
   "displayName": "Working Time Tracker",
   "description": "Tracker for time spending on projects.",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "publisher": "Oblitus",
   "author": {
     "name": "JPiotr",
@@ -23,37 +23,37 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
-    "configuration":{
+    "configuration": {
       "title": "Working Time Tracker",
       "properties": {
-        "workingtimetracker.innerSessions.registerIdle":{
-          "type":"boolean",
+        "workingtimetracker.innerSessions.registerIdle": {
+          "type": "boolean",
           "default": false,
           "description": "It defines if You want to see time sumarize with idle."
         },
-        "workingtimetracker.innerSessions.uiRefreshTime":{
-          "type":"number",
+        "workingtimetracker.innerSessions.uiRefreshTime": {
+          "type": "number",
           "default": 250,
-          "description": "Defines how ofen ui should refresh."
+          "description": "Defines how ofen ui should refresh in ms."
         },
-        "workingtimetracker.innerSessions.autoSave":{
-          "type":"boolean",
-          "default":false,
+        "workingtimetracker.innerSessions.autoSave": {
+          "type": "boolean",
+          "default": true,
           "description": "Defines if You want autosave."
         },
-        "workingtimetracker.innerSessions.autoSaveTime":{
-          "type":"number",
-          "default":900000,
+        "workingtimetracker.innerSessions.autoSaveTime": {
+          "type": "number",
+          "default": 900000,
           "description": "Auto save interval in ms, default 15min."
         },
-        "workingtimetracker.innerSessions.idleTime":{
-          "type":"number",
-          "default":300000,
+        "workingtimetracker.innerSessions.idleTime": {
+          "type": "number",
+          "default": 300000,
           "description": "Idle detection interval in ms, default 5min."
         },
-        "workingtimetracker.fileName":{
-          "type":"string",
-          "default":".workingtime",
+        "workingtimetracker.fileName": {
+          "type": "string",
+          "default": ".workingtime",
           "description": "Saved sessions filename."
         }
       }
@@ -73,6 +73,11 @@
         "command": "workingtimetracker.idle",
         "title": "Idle",
         "category": "Working Time Tracker"
+      },
+      {
+        "command": "workingtimetracker.save",
+        "title": "Save Data",
+        "category": "Working Time Tracker"
       }
     ]
   },
@@ -84,10 +89,11 @@
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
+    "lint": "eslint src -c eslint.config.mjs",
     "test": "vscode-test"
   },
   "devDependencies": {
+    "@eslint/js": "^9.13.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "20.x",
     "@types/uuid": "^10.0.0",
@@ -95,11 +101,13 @@
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.11.0",
     "@vscode/test-cli": "^0.0.9",
-    "@vscode/test-electron": "^2.4.0",
-    "eslint": "^8.57.0",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^8.57.1",
+    "globals": "^15.11.0",
     "rxjs": "^7.8.1",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^8.10.0",
     "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4"
   }
