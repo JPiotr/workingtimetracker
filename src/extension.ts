@@ -58,10 +58,10 @@ export function activate(context: vscode.ExtensionContext) {
       }
       if (
         config.innerSessions.autoSaveTime !=
-        newConfig.innerSessions.uiRefreshTime
+        newConfig.innerSessions.autoSaveTime
       ) {
         autoSaveSubsciption.unsubscribe();
-		autoSave = interval(newConfig.innerSessions.uiRefreshTime);
+        autoSave = interval(newConfig.innerSessions.autoSaveTime);
         autoSaveSubsciption = autoSave.subscribe(() => {
           if (config.innerSessions.autoSave && !newly) {
             DataStorageManager.getInstance().saveData();
@@ -70,7 +70,7 @@ export function activate(context: vscode.ExtensionContext) {
       }
       if (config.innerSessions.idleTime != newConfig.innerSessions.idleTime) {
         idleSub.unsubscribe();
-		idle = interval(newConfig.innerSessions.idleTime);
+        idle = interval(newConfig.innerSessions.idleTime);
         idleSub = idle.subscribe(() => {
           if (
             Date.now() - BehaviorDetector.getInstance().lastActive >
@@ -168,7 +168,6 @@ function getState(state: ActionType): string | undefined {
   }
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {
   SessionManager.getInstance().menageSession(ActionType.Stop);
   DataStorageManager.getInstance().saveData();
