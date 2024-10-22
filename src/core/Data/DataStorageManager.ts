@@ -3,7 +3,7 @@ import { IData } from "../IData";
 import { SessionManager } from "../Sessions/SessionManager";
 import { IDataStorage } from "./IDataStorage";
 import { IUserData } from "../IUserData";
-import { IDailySessions } from "../IDaylySessions";
+import { IDailySessions } from "../IDailySessions";
 import { UserInfoGetter } from "./UserInfoGetter";
 
 export class DataStorageManager implements IDataStorage {

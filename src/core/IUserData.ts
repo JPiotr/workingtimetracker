@@ -1,6 +1,6 @@
-import { IDailySessions } from "./IDaylySessions";
+import { IDailySessions } from "./IDailySessions";
 
 export interface IUserData {
   user: string;
-  daylySessions: IDailySessions[];
+  dailySessions: IDailySessions[];
 }
