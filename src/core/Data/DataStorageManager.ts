@@ -91,7 +91,7 @@ export class DataStorageManager implements IDataStorage {
         current.sessions =
           SessionManager.getInstance().getCurrentlyManagedSessions();
       } else {
-        data.daylySessions.push({
+        data.dailySessions.push({
           date: this.today,
           sessions: SessionManager.getInstance().getCurrentlyManagedSessions(),
         });
@@ -99,7 +99,7 @@ export class DataStorageManager implements IDataStorage {
     } else {
       this.storage.data.push({
         user: this.currentUser,
-        daylySessions: [
+        dailySessions: [
           {
             date: this.today,
             sessions:
@@ -133,6 +133,6 @@ export class DataStorageManager implements IDataStorage {
     return this.storage.data.find((x) => x.user === this.currentUser);
   }
   private findTodaysSessions(userData: IUserData): IDailySessions | undefined {
-    return userData.daylySessions.find((x) => x.date === this.today);
+    return userData.dailySessions.find((x) => x.date === this.today);
   }
 }
