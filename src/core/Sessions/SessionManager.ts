@@ -1,7 +1,6 @@
 import { ISessionDataRow } from "./ISessionDataRow";
 import { ActionType } from "../ActionType";
 import { Session } from "./Session";
-import * as vscode from "vscode";
 
 export class SessionManager {
   private static instance: SessionManager;
@@ -9,18 +8,11 @@ export class SessionManager {
   private oldSession!: Session;
   private currentAction: ActionType = ActionType.Idle;
   private managedSessions: ISessionDataRow[] = [];
-  private static registerIdle =
-    vscode.workspace.getConfiguration("workingtimetracker").innerSessions
-      .registerIdle;
 
   static getInstance(): SessionManager {
     if (this.instance === undefined) {
       this.instance = new SessionManager();
     }
-    this.registerIdle =
-      vscode.workspace.getConfiguration(
-        "workingtimetracker"
-      ).innerSessions.registerIdle;
     return this.instance;
   }
   private constructor() {
@@ -37,18 +29,14 @@ export class SessionManager {
         this.currentSession.start();
         return {
           actionType: this.currentAction,
-          sessionInfo: this.currentSession.getSessionInfo(
-            SessionManager.registerIdle
-          ),
+          sessionInfo: this.currentSession.getSessionInfo(),
         };
       case ActionType.Idle:
         this.currentSession.idle();
         this.currentAction = actionType;
         return {
           actionType: this.currentAction,
-          sessionInfo: this.currentSession.getSessionInfo(
-            SessionManager.registerIdle
-          ),
+          sessionInfo: this.currentSession.getSessionInfo(),
         };
       case ActionType.Stop:
         this.currentSession.end();
@@ -58,9 +46,7 @@ export class SessionManager {
         this.currentAction = actionType;
         return {
           actionType: this.currentAction,
-          sessionInfo: this.oldSession.getSessionInfo(
-            SessionManager.registerIdle
-          ),
+          sessionInfo: this.oldSession.getSessionInfo(),
         };
     }
   }
@@ -70,16 +56,12 @@ export class SessionManager {
       this.currentAction === ActionType.Stop
     ) {
       return {
-        sessionInfo: this.oldSession.getSessionInfo(
-          SessionManager.registerIdle
-        ),
+        sessionInfo: this.oldSession.getSessionInfo(),
         actionType: this.currentAction,
       };
     }
     return {
-      sessionInfo: this.currentSession.getSessionInfo(
-        SessionManager.registerIdle
-      ),
+      sessionInfo: this.currentSession.getSessionInfo(),
       actionType: this.currentAction,
     };
   }
@@ -87,9 +69,7 @@ export class SessionManager {
     return [
       ...this.getManagedSessions(),
       {
-        sessionInfo: this.currentSession.getSessionInfo(
-          SessionManager.registerIdle
-        ),
+        sessionInfo: this.currentSession.getSessionInfo(),
         actionType: this.currentAction,
       },
     ];
@@ -125,9 +105,7 @@ export class SessionManager {
   }
   private saveSession(): void {
     this.managedSessions.push({
-      sessionInfo: this.currentSession.getSessionInfo(
-        SessionManager.registerIdle
-      ),
+      sessionInfo: this.currentSession.getSessionInfo(),
       actionType: this.currentAction,
     });
   }
