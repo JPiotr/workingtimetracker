@@ -14,7 +14,7 @@ export class BehaviorDetector implements IBehaviorDetector {
   private static instance: BehaviorDetector;
   private isIdle: boolean = false;
   private constructor() {}
-
+  //todo: testing detection also if files with 'test' are being edited
   static getInstance() {
     if (this.instance === undefined) {
       this.instance = new BehaviorDetector();
@@ -32,7 +32,7 @@ export class BehaviorDetector implements IBehaviorDetector {
       }),
       vscode.tasks.onDidEndTask(() => {
         this.setNewAction(ActionType.Idle);
-      }),
+       }),
       vscode.tasks.onDidEndTaskProcess(() => {
         this.setNewAction(ActionType.Idle);
       }),
