@@ -5,23 +5,30 @@ import { IDataStorage } from "./IDataStorage";
 import { IUserData } from "../IUserData";
 import { IDailySessions } from "../IDailySessions";
 import { UserInfoGetter } from "./UserInfoGetter";
+import { getActionTypeConfig, getSessionStateConfig } from "../../static/Utils";
+
+//todo: Store on witch types of files session was registered, maybe split session to difrent type of file?
 
 export class DataStorageManager implements IDataStorage {
   private userInfoGetter = new UserInfoGetter();
   private currentUser: string = this.userInfoGetter.username;
   private static instance: DataStorageManager;
-  private today: string = new Date(Date.now()).toLocaleString(
-    Intl.Locale.name,
-    { day: "numeric", month: "numeric", year: "numeric" }
-  );
+  private today!: string;
   private filePath: string = "";
   private storage: IData = {
+    extConfig: {
+      enums: [getActionTypeConfig(), getSessionStateConfig()],
+    },
     data: [],
   };
   static getInstance(): DataStorageManager {
     if (this.instance === undefined) {
       this.instance = new DataStorageManager();
     }
+    this.instance.today = new Date(Date.now()).toLocaleString(
+      Intl.Locale.name,
+      { day: "numeric", month: "numeric", year: "numeric" }
+    );
     return this.instance;
   }
   private constructor() {
@@ -120,7 +127,9 @@ export class DataStorageManager implements IDataStorage {
         return !flag;
       },
       () => {
-        vscode.window.showInformationMessage("There is no reqired file, creating new.")
+        vscode.window.showInformationMessage(
+          "There is no reqired file, creating new."
+        );
         vscode.workspace.fs.writeFile(
           vscode.Uri.parse(this.filePath),
           Buffer.from("")
