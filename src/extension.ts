@@ -116,6 +116,9 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 function updateStatusBarItem(): void {
+  const registerIdle =
+    vscode.workspace.getConfiguration("workingtimetracker").innerSessions
+      .registerIdle;
   if (BehaviorDetector.getInstance().isDetectedNewAction()) {
     newly = false;
   }
@@ -129,7 +132,9 @@ function updateStatusBarItem(): void {
   const sessionMenager = SessionManager.getInstance();
   const sessionDataRow = sessionMenager.getSessionInfo();
 
-  const duration = sessionDataRow.sessionInfo.duration;
+  const duration = registerIdle
+    ? sessionDataRow.sessionInfo.idle
+    : sessionDataRow.sessionInfo.duration;
   const icon =
     sessionDataRow.sessionInfo.state === SessionState.Ongoing
       ? ICON_STARTED
