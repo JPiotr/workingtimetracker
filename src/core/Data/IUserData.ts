@@ -1,12 +1,9 @@
+
 import { IDailySessions } from "./IDailySessions";
+import { IUserConfig } from "./IUserConfig";
 
 export interface IUserData {
   user: string;
+  config: IUserConfig;
   dailySessions: IDailySessions[];
-}
-
-//todo : Add user config to save
-
-export interface IUserConfig {
-  showIdle : boolean
 }
