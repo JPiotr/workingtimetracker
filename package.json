@@ -26,7 +26,7 @@
     "configuration": {
       "title": "Working Time Tracker",
       "properties": {
-        "workingtimetracker.innerSessions.registerIdle": {
+        "workingtimetracker.innerSessions.showIdle": {
           "type": "boolean",
           "default": false,
           "description": "It defines if You want to see time sumarize with idle."
@@ -43,13 +43,13 @@
         },
         "workingtimetracker.innerSessions.autoSaveTime": {
           "type": "number",
-          "default": 900000,
-          "description": "Auto save interval in ms, default 15min."
+          "default": 15,
+          "description": "Auto save interval in mins, default 15min."
         },
         "workingtimetracker.innerSessions.idleTime": {
           "type": "number",
-          "default": 300000,
-          "description": "Idle detection interval in ms, default 5min."
+          "default": 5,
+          "description": "Idle detection interval in mins, default 5min."
         },
         "workingtimetracker.fileName": {
           "type": "string",
