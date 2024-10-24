@@ -1,5 +1,5 @@
 import { ActionType } from "../core/ActionType";
-import { IEnumData } from "../core/IEnumData";
+import { IEnumData } from "../core/Data/IEnumData";
 import { SessionState } from "../core/Sessions/SessionState";
 
 /**
