@@ -80,6 +80,7 @@ export function activate(context: vscode.ExtensionContext) {
           }
         });
       }
+      BehaviorDetector.getInstance();
       config = newConfig;
     }),
     ...BehaviorDetector.getInstance().detectCodding(),

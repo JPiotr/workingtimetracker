@@ -57,13 +57,15 @@ This extension contributes the following settings:
 * `workingtimetracker.innerSessions.autoSaveTime`: Auto save interval in ms, default 15min.
 * `workingtimetracker.innerSessions.idleTime`: Idle detection interval in ms, default 5min.
 * `workingtimetracker.fileName`: Saved sessions filename.
+* `workingtimetracker.behaviorDetector.doumentationFilesExt`: Array of files extension that are involved in creating documentation.
+* `workingtimetracker.behaviorDetector.detectTestingWhileEditingTestFile`: Defines if You want detector to detect editing file with `test` in ther name to be treat as testing.
 
 ## Todo
 
 - [ ] Add some logo
 - [ ] Create more tests
-- [ ] Migrate hardcoded file extensions to configuration
-- [ ] Visualization tool
+- [x] Migrate hardcoded file extensions to configuration
+- [ ] Visualization tool - in progress
 - [ ] Determine on witch branch user is working
 
 ## Known Issues

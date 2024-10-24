@@ -2,7 +2,7 @@
   "name": "workingtimetracker",
   "displayName": "Working Time Tracker",
   "description": "Tracker for time spending on projects.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "Oblitus",
   "author": {
     "name": "JPiotr",
@@ -55,6 +55,16 @@
           "type": "string",
           "default": ".workingtime",
           "description": "Saved sessions filename."
+        },
+        "workingtimetracker.behaviorDetector.doumentationFilesExt": {
+          "type":"array",
+          "default": [".txt",".json",".md"],
+          "description": "Files that are used to create documentation"
+        },
+        "workingtimetracker.behaviorDetector.detectTestingWhileEditingTestFile": {
+          "type":"boolean",
+          "default": true,
+          "description": "Defines if You want detector to detect if You editing files with 'test' in their name"
         }
       }
     },
