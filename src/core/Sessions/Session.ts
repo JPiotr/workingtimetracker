@@ -16,6 +16,9 @@ export class Session {
   }
 
   start(): void {
+    if(!this._newSession && this.sessionState === SessionState.Idle){
+      this._sessionsChain.current.end();
+    }
     if (this.sessionState !== SessionState.Ongoing) {
       this.sessionState = SessionState.Ongoing;
       this.createNewSessionDuration(this.sessionState);
