@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import { ActionType } from "../ActionType";
 import { SessionManager } from "../Sessions/SessionManager";
 import { IBehaviorDetector } from "./IBehaviorDetector";
+import { DataStorageManager } from "../Data/DataStorageManager";
 
 const documentationFiles = [".md", ".txt", ".json"];
 
@@ -118,6 +119,18 @@ export class BehaviorDetector implements IBehaviorDetector {
       }),
       vscode.tasks.onDidStartTaskProcess(() => {
         this.setNewAction(ActionType.Building);
+      }),
+    ];
+  }
+  detectWorkspaceChanged() : vscode.Disposable[] {
+    return [
+      vscode.window.onDidChangeActiveTextEditor((e) => {
+        if(e !== undefined){
+          const newUri = vscode.Uri.parse(e?.document.uri.path);
+          if(DataStorageManager.currentWorkspace !== newUri){
+            DataStorageManager.currentWorkspace = newUri;
+          }
+        }
       }),
     ];
   }
