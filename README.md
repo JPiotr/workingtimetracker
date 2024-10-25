@@ -25,6 +25,10 @@ It can register:
 
 Extension detect what You are doing in Your project and decides if You are codding or You are afk on some coffie ☕.
 
+### Workspaces support
+
+You are working on many workspaces at the same time, now it will detect that and create new file for every workspace. 📚
+
 ### User data
 
 If You want extension will on itself determine Who You are, and store data under Your github name. 🥸
@@ -74,6 +78,10 @@ Feel free to create some!
 
 ## Release Notes
 
+### 1.1.0
+
+Here it comes, after using it for a while I spotted some bugs and I decide to add some new features. 
+See changelog for more informations. 😁
 
 ### 1.0.0
 
