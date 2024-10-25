@@ -88,6 +88,7 @@ export function activate(context: vscode.ExtensionContext) {
     ...BehaviorDetector.getInstance().detectDocumenting(),
     ...BehaviorDetector.getInstance().detectBuilding(),
     ...BehaviorDetector.getInstance().detectIdle(),
+    ...BehaviorDetector.getInstance().detectTesting(),
     ...BehaviorDetector.getInstance().detectWorkspaceChanged()
   );
 
