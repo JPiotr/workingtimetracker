@@ -13,6 +13,9 @@ suite(`SessionDuration`, () => {
     assert.equal(duration.getInfo().id !== undefined, true);
     duration.end();
   });
+  test(`Should not register duration before end`, ()=>{
+    assert.equal(duration.getDuration(),0);
+  });
   test(`Should duration end`, () => {
     setTimeout(() => {
       duration.end();
@@ -29,4 +32,16 @@ suite(`SessionDuration`, () => {
     duration.end();
     assert.equal(duration.getInfo().state, SessionState.Ongoing);
   });
+  test(`Should return all information`, ()=>{
+    setTimeout(()=>{
+      duration.end();
+      const info = duration.getInfo();
+      assert.notEqual(info, undefined);
+      assert.notEqual(info, null);
+      assert.notEqual(info.id,"");
+      assert.equal(info.duration > 1000, true);
+      assert.equal(info.state, SessionState.Ongoing);
+      assert.equal(info.begin > info.end, true);
+    },1000);
+  })
 });
