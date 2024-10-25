@@ -1,39 +1,51 @@
 import * as vscode from "vscode";
-import { IData } from "../IData";
+import { IData } from "./IData";
 import { SessionManager } from "../Sessions/SessionManager";
 import { IDataStorage } from "./IDataStorage";
-import { IUserData } from "../IUserData";
-import { IDailySessions } from "../IDaylySessions";
+import { IUserData } from "./IUserData";
+import { IDailySessions } from "./IDailySessions";
 import { UserInfoGetter } from "./UserInfoGetter";
+import { getActionTypeConfig, getSessionStateConfig } from "../../static/Utils";
 
 export class DataStorageManager implements IDataStorage {
   private userInfoGetter = new UserInfoGetter();
   private currentUser: string = this.userInfoGetter.username;
   private static instance: DataStorageManager;
-  private today: string = new Date(Date.now()).toLocaleString(
-    Intl.Locale.name,
-    { day: "numeric", month: "numeric", year: "numeric" }
-  );
+  private today!: string;
   private filePath: string = "";
   private storage: IData = {
+    extConfig: {
+      enums: [getActionTypeConfig(), getSessionStateConfig()],
+    },
     data: [],
   };
+  static currentWorkspace : vscode.Uri | undefined;
+
   static getInstance(): DataStorageManager {
     if (this.instance === undefined) {
       this.instance = new DataStorageManager();
     }
+    DataStorageManager.currentWorkspace =
+      vscode.workspace.workspaceFolders === undefined
+        ? undefined
+        : vscode.workspace.workspaceFolders[0].uri;
+    this.instance.updateFilePath();
+    this.instance.today = new Date(Date.now()).toLocaleString(
+      Intl.Locale.name,
+      { day: "numeric", month: "numeric", year: "numeric" }
+    );
     return this.instance;
   }
   private constructor() {
-    const wFolders = vscode.workspace.workspaceFolders;
-    if (wFolders !== undefined) {
+    DataStorageManager.currentWorkspace =
+    vscode.workspace.workspaceFolders === undefined
+      ? undefined
+      : vscode.workspace.workspaceFolders[0].uri;
+    if (DataStorageManager.currentWorkspace !== undefined) {
       this.userInfoGetter.getUsername().then((fullfilled) => {
         this.currentUser = fullfilled;
       });
-      this.filePath = vscode.Uri.joinPath(
-        wFolders[0].uri,
-        vscode.workspace.getConfiguration("workingtimetracker").fileName
-      ).path;
+      this.updateFilePath();
       this.loadData();
     }
   }
@@ -83,6 +95,14 @@ export class DataStorageManager implements IDataStorage {
         );
     }
   }
+  updateFilePath(){
+    if(DataStorageManager.currentWorkspace !== undefined){
+      this.filePath = vscode.Uri.joinPath(
+        DataStorageManager.currentWorkspace,
+        vscode.workspace.getConfiguration("workingtimetracker").fileName
+      ).path;
+    }
+  }
   private collectData(): void {
     const data = this.findUserDataInfo();
     if (data !== undefined) {
@@ -91,15 +111,19 @@ export class DataStorageManager implements IDataStorage {
         current.sessions =
           SessionManager.getInstance().getCurrentlyManagedSessions();
       } else {
-        data.daylySessions.push({
+        data.dailySessions.push({
           date: this.today,
           sessions: SessionManager.getInstance().getCurrentlyManagedSessions(),
         });
       }
     } else {
       this.storage.data.push({
+        config: {
+          showIdle:
+            vscode.workspace.getConfiguration("workingtimetracker").showIdle,
+        },
         user: this.currentUser,
-        daylySessions: [
+        dailySessions: [
           {
             date: this.today,
             sessions:
@@ -120,7 +144,9 @@ export class DataStorageManager implements IDataStorage {
         return !flag;
       },
       () => {
-        vscode.window.showInformationMessage("There is no reqired file, creating new.")
+        vscode.window.showInformationMessage(
+          "There is no reqired file, creating new."
+        );
         vscode.workspace.fs.writeFile(
           vscode.Uri.parse(this.filePath),
           Buffer.from("")
@@ -133,6 +159,6 @@ export class DataStorageManager implements IDataStorage {
     return this.storage.data.find((x) => x.user === this.currentUser);
   }
   private findTodaysSessions(userData: IUserData): IDailySessions | undefined {
-    return userData.daylySessions.find((x) => x.date === this.today);
+    return userData.dailySessions.find((x) => x.date === this.today);
   }
 }

@@ -15,8 +15,8 @@ import { BehaviorDetector } from "./core/Behavior/BehaviorDetector";
 
 let config = vscode.workspace.getConfiguration("workingtimetracker");
 let ticks = interval(config.innerSessions.uiRefreshTime);
-let autoSave = interval(config.innerSessions.autoSaveTime);
-let idle = interval(config.innerSessions.idleTime);
+let autoSave = interval(config.innerSessions.autoSaveTime * 60 * 1000);
+let idle = interval(config.innerSessions.idleTime * 60 * 1000);
 let subscription = Subscription.EMPTY;
 let autoSaveSubsciption = Subscription.EMPTY;
 let idleSub = Subscription.EMPTY;
@@ -61,7 +61,7 @@ export function activate(context: vscode.ExtensionContext) {
         newConfig.innerSessions.autoSaveTime
       ) {
         autoSaveSubsciption.unsubscribe();
-        autoSave = interval(newConfig.innerSessions.autoSaveTime);
+        autoSave = interval(newConfig.innerSessions.autoSaveTime * 60 * 1000);
         autoSaveSubsciption = autoSave.subscribe(() => {
           if (config.innerSessions.autoSave && !newly) {
             DataStorageManager.getInstance().saveData();
@@ -70,7 +70,7 @@ export function activate(context: vscode.ExtensionContext) {
       }
       if (config.innerSessions.idleTime != newConfig.innerSessions.idleTime) {
         idleSub.unsubscribe();
-        idle = interval(newConfig.innerSessions.idleTime);
+        idle = interval(newConfig.innerSessions.idleTime * 60 * 1000);
         idleSub = idle.subscribe(() => {
           if (
             Date.now() - BehaviorDetector.getInstance().lastActive >
@@ -80,17 +80,20 @@ export function activate(context: vscode.ExtensionContext) {
           }
         });
       }
+      BehaviorDetector.getInstance();
       config = newConfig;
     }),
     ...BehaviorDetector.getInstance().detectCodding(),
     ...BehaviorDetector.getInstance().detectDebuging(),
     ...BehaviorDetector.getInstance().detectDocumenting(),
     ...BehaviorDetector.getInstance().detectBuilding(),
-    ...BehaviorDetector.getInstance().detectIdle()
+    ...BehaviorDetector.getInstance().detectIdle(),
+    ...BehaviorDetector.getInstance().detectTesting(),
+    ...BehaviorDetector.getInstance().detectWorkspaceChanged()
   );
 
   statusBarItem = vscode.window.createStatusBarItem(
-    vscode.StatusBarAlignment.Right,
+    vscode.StatusBarAlignment.Left,
     500
   );
   statusBarItem.show();
@@ -116,6 +119,9 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 function updateStatusBarItem(): void {
+  const showIdle =
+    vscode.workspace.getConfiguration("workingtimetracker").innerSessions
+      .showIdle;
   if (BehaviorDetector.getInstance().isDetectedNewAction()) {
     newly = false;
   }
@@ -129,43 +135,24 @@ function updateStatusBarItem(): void {
   const sessionMenager = SessionManager.getInstance();
   const sessionDataRow = sessionMenager.getSessionInfo();
 
-  const duration = sessionDataRow.sessionInfo.duration;
+  const duration = showIdle
+    ? sessionDataRow.sessionInfo.idle
+    : sessionDataRow.sessionInfo.duration;
   const icon =
     sessionDataRow.sessionInfo.state === SessionState.Ongoing
       ? ICON_STARTED
       : sessionDataRow.sessionInfo.state === SessionState.Idle
       ? ICON_PAUSED
       : ICON_STOPPED;
-  const action = getState(sessionDataRow.actionType);
+  const action = sessionDataRow.actionType;
 
-  statusBarItem.text = `${icon} ${action} | Time: ${convertTimeToString(
+  statusBarItem.text = `Time: ${convertTimeToString(
     duration
-  )}`;
+  )} | ${icon} ${action}`;
   statusBarItem.command =
     sessionDataRow.sessionInfo.state === SessionState.Ongoing
       ? COMMAND_STOP
       : COMMAND_START;
-}
-
-function getState(state: ActionType): string | undefined {
-  switch (state) {
-    case ActionType.Idle:
-      return "Idle       ";
-    case ActionType.Codding:
-      return "Codding    ";
-    case ActionType.Debugging:
-      return "Debugging  ";
-    case ActionType.Documenting:
-      return "Documenting";
-    case ActionType.Testing:
-      return "Testing    ";
-    case ActionType.Stop:
-      return "Stop       ";
-    case ActionType.Building:
-      return "Building   ";
-    default:
-      return "Undefined  ";
-  }
 }
 
 export function deactivate() {

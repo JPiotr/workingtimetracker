@@ -2,8 +2,7 @@ import * as vscode from "vscode";
 import { ActionType } from "../ActionType";
 import { SessionManager } from "../Sessions/SessionManager";
 import { IBehaviorDetector } from "./IBehaviorDetector";
-
-const documentationFiles = [".md", ".txt", ".json"];
+import { DataStorageManager } from "../Data/DataStorageManager";
 
 export class BehaviorDetector implements IBehaviorDetector {
   public lastActive: number = 0;
@@ -13,12 +12,16 @@ export class BehaviorDetector implements IBehaviorDetector {
   private state: boolean = true;
   private static instance: BehaviorDetector;
   private isIdle: boolean = false;
+  private config!: vscode.WorkspaceConfiguration;
+
   private constructor() {}
 
   static getInstance() {
     if (this.instance === undefined) {
       this.instance = new BehaviorDetector();
     }
+    this.instance.config =
+      vscode.workspace.getConfiguration("workingtimetracker");
     return this.instance;
   }
 
@@ -46,18 +49,42 @@ export class BehaviorDetector implements IBehaviorDetector {
         }
         this.invokeManager();
       }),
+      vscode.window.onDidChangeActiveTextEditor((e) => {
+        this.updateConfig();
+        if (this.getFileName(e).toLowerCase().includes(this.config.fileName)) {
+          this.setNewAction(ActionType.Idle);
+        }
+      }),
+      vscode.window.onDidChangeTextEditorSelection((e) => {
+        this.updateConfig();
+        if (this.getFileName(e.textEditor).toLowerCase().includes(this.config.fileName)) {
+          this.setNewAction(ActionType.Idle);
+        }
+      }),
     ];
   }
   detectCodding(): vscode.Disposable[] {
     return [
       vscode.window.onDidChangeActiveTextEditor((e) => {
-        if (!documentationFiles.some((x) => this.getFileName(e).includes(x))) {
+        this.updateConfig();
+        if (
+          !this.config.behaviorDetector.doumentationFilesExt.some((x: string) =>
+            this.getFileName(e).includes(x)
+          ) &&
+          !this.getFileName(e).toLowerCase().includes("test") &&
+          !this.getFileName(e).toLowerCase().includes(this.config.fileName)
+        ) {
           this.setNewAction(ActionType.Codding);
         }
       }),
       vscode.window.onDidChangeTextEditorSelection((e) => {
+        this.updateConfig();
         if (
-          !documentationFiles.some((x) =>
+          !this.getFileName(e.textEditor)
+            .toLowerCase()
+            .includes(this.config.fileName) &&
+          !this.getFileName(e.textEditor).includes("test") &&
+          !this.config.behaviorDetector.doumentationFilesExt.some((x: string) =>
             this.getFileName(e.textEditor).includes(x)
           )
         ) {
@@ -82,13 +109,23 @@ export class BehaviorDetector implements IBehaviorDetector {
   detectDocumenting(): vscode.Disposable[] {
     return [
       vscode.window.onDidChangeActiveTextEditor((e) => {
-        if (documentationFiles.some((x) => this.getFileName(e).includes(x))) {
+        this.updateConfig();
+        if (
+          !this.getFileName(e).toLowerCase().includes(this.config.fileName) &&
+          !this.getFileName(e).toLowerCase().includes("test") &&
+          this.config.behaviorDetector.doumentationFilesExt.some((x: string) =>
+            this.getFileName(e).includes(x)
+          )
+        ) {
           this.setNewAction(ActionType.Documenting);
         }
       }),
       vscode.window.onDidChangeTextEditorSelection((e) => {
+        this.updateConfig();
         if (
-          documentationFiles.some((x) =>
+          !this.getFileName(e.textEditor).toLowerCase().includes(this.config.fileName) &&
+          !this.getFileName(e.textEditor).toLowerCase().includes("test") &&
+          this.config.behaviorDetector.doumentationFilesExt.some((x: string) =>
             this.getFileName(e.textEditor).includes(x)
           )
         ) {
@@ -109,6 +146,24 @@ export class BehaviorDetector implements IBehaviorDetector {
           this.setNewAction(ActionType.Testing);
         }
       }),
+      vscode.window.onDidChangeActiveTextEditor((e) => {
+        this.updateConfig();
+        if (
+          this.config.behaviorDetector.detectTestingWhileEditingTestFile &&
+          this.getFileName(e).toLowerCase().includes("test")
+        ) {
+          this.setNewAction(ActionType.Testing);
+        }
+      }),
+      vscode.window.onDidChangeTextEditorSelection((e) => {
+        this.updateConfig();
+        if (
+          this.config.behaviorDetector.detectTestingWhileEditingTestFile &&
+          this.getFileName(e.textEditor).includes("test")
+        ) {
+          this.setNewAction(ActionType.Testing);
+        }
+      }),
     ];
   }
   detectBuilding(): vscode.Disposable[] {
@@ -121,16 +176,27 @@ export class BehaviorDetector implements IBehaviorDetector {
       }),
     ];
   }
+  detectWorkspaceChanged(): vscode.Disposable[] {
+    return [
+      vscode.window.onDidChangeActiveTextEditor((e) => {
+        if (e !== undefined) {
+          const newUri = vscode.Uri.parse(e?.document.uri.path);
+          if (DataStorageManager.currentWorkspace !== newUri) {
+            DataStorageManager.currentWorkspace = newUri;
+          }
+        }
+      }),
+    ];
+  }
   private getFileName(textEditor: vscode.TextEditor | undefined): string {
     const fileName = textEditor?.document.fileName;
-    return fileName === undefined ? "" : fileName;
+    return fileName === undefined ? "" : fileName.toLowerCase();
   }
   idleUser() {
     if (this.currentAction !== ActionType.Idle && this.state) {
       this.lastDetectedAction = this.currentAction;
       this.currentAction = ActionType.Idle;
       this.isIdle = true;
-      this.invokeManager();
     }
     this.invokeManager();
   }
@@ -147,5 +213,8 @@ export class BehaviorDetector implements IBehaviorDetector {
     if (this.isDetectedNewAction()) {
       this.sessionMenager.menageSession(this.currentAction);
     }
+  }
+  private updateConfig(): void {
+    this.config = vscode.workspace.getConfiguration("workingtimetracker");
   }
 }

@@ -5,10 +5,9 @@ import { SessionDuration } from "./SessionDuration";
 import { SessionState } from "./SessionState";
 
 export class Session {
-  private _sessionsChain!: Node<SessionDuration>;
   private _id: string;
   private _newSession: boolean;
-  private _idleTime = 0;
+  private _sessionsChain!: Node<SessionDuration>;
   sessionState: SessionState = SessionState.Idle;
 
   constructor() {
@@ -17,10 +16,12 @@ export class Session {
   }
 
   start(): void {
+    if(!this._newSession && this.sessionState === SessionState.Idle){
+      this._sessionsChain.current.end();
+    }
     if (this.sessionState !== SessionState.Ongoing) {
-      this.saveIdleTime();
-      this.createNewSessionDuration();
       this.sessionState = SessionState.Ongoing;
+      this.createNewSessionDuration(this.sessionState);
       this._newSession = false;
     }
   }
@@ -28,48 +29,41 @@ export class Session {
   idle(): void {
     if (this.sessionState === SessionState.Ongoing && !this._newSession) {
       this._sessionsChain.current.end();
-      this.createNewSessionDuration();
       this.sessionState = SessionState.Idle;
+      this.createNewSessionDuration(this.sessionState);
     }
   }
 
   end(): void {
-    this.saveIdleTime();
     if (this.sessionState !== SessionState.Ended && !this._newSession) {
       this._sessionsChain.current.end();
       this.sessionState = SessionState.Ended;
     }
   }
 
-  private createNewSessionDuration(): void {
+  private createNewSessionDuration(state: SessionState): void {
     const session = new SessionDuration();
-    session.start();
+    session.start(state);
     this._sessionsChain = this._newSession
       ? new Node<SessionDuration>(session)
       : new Node<SessionDuration>(session, this._sessionsChain);
   }
 
-  private saveIdleTime(): void {
-    if (this.sessionState === SessionState.Idle && !this._newSession) {
-      this._idleTime += this._sessionsChain.current.getCurrentDuration();
-    }
-  }
-
-  //it should get the sumarize session duration time.
-  getSessionDuration(withIdle: boolean): number {
+  getSessionDuration(): number[] {
     let node: Node<SessionDuration> = this._sessionsChain;
-    let duration = 0;
+    const durations = [0, 0];
 
     if (node === undefined) {
-      return duration;
+      return durations;
     }
-
+    const currentDuration = node.current.getCurrentDuration();
     switch (this.sessionState) {
       case SessionState.Ongoing:
-        duration = node.current.getCurrentDuration();
+        durations[0] = currentDuration;
+        durations[1] += currentDuration;
         break;
       case SessionState.Idle:
-        duration += withIdle ? node.current.getCurrentDuration() : 0;
+        durations[1] += currentDuration;
         break;
       case SessionState.Ended:
         break;
@@ -77,16 +71,18 @@ export class Session {
 
     while (node.previous !== null) {
       node = node.previous;
-      duration += node.current.getDuration();
+      const nodeDuration = node.current.getDuration();
+      if (node.current.getInfo().state === SessionState.Idle) {
+        durations[1] += nodeDuration;
+        continue;
+      }
+      durations[0] += nodeDuration;
+      durations[1] += nodeDuration;
     }
-    return withIdle ? duration + this._idleTime : duration;
+    return durations;
   }
 
-  getSessionIdleDuration(): number {
-    return this._idleTime;
-  }
-
-  getSessionInfo(withIdle: boolean): ISessionInfo {
+  getSessionInfo(): ISessionInfo {
     const durations: ISessionDurationInfo[] = [];
     let node: Node<SessionDuration> = this._sessionsChain;
     if (!this._newSession) {
@@ -96,9 +92,11 @@ export class Session {
         durations.push(node.current.getInfo());
       }
     }
+    const duration = this.getSessionDuration();
     return {
       id: this._id,
-      duration: this.getSessionDuration(withIdle),
+      duration: duration[0],
+      idle: duration[1],
       state: this.sessionState,
       durations: durations,
     };

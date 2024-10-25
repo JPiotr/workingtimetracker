@@ -1,5 +1,5 @@
 export enum SessionState {
-  Ongoing,
-  Idle,
-  Ended,
+  Ongoing = "Ongoing",
+  Idle = "Idle",
+  Ended = "Ended",
 }

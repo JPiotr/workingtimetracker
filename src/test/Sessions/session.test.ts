@@ -10,19 +10,33 @@ suite(`Session`, () => {
   });
   suite(`Session durations`, () => {
     const session: Session = new Session();
-    test(`Should return idle time`, () => {
-      session.start();
-      session.idle();
-      setTimeout(() => {
-        assert.equal(session.getSessionIdleDuration() >= 1000, 1000);
-      }, 1000);
-    });
     test(`Should contains 3 durations`, () => {
-      session.start();
-      session.idle();
-      session.start();
+      session.start(); //first
+      session.idle(); //second
+      session.start(); //third
       session.end();
-      assert.equal(session.getSessionInfo(false).durations.length, 5);
+      assert.equal(session.getSessionInfo().durations.length, 3);
+    });
+    test(`Should return idle time`, async () => {
+      session.start();
+      await new Promise((resolve) => {
+        setTimeout(resolve, 500);
+      });
+      const duration = session.getSessionDuration()[1];
+      session.idle();
+      await new Promise((resolve) => {
+        setTimeout(resolve, 500);
+      });
+      const idle = session.getSessionDuration()[1];
+      assert.equal(duration >= 500 && duration < idle, true);
+      assert.equal(idle >= 1000, true);
+    });
+    test(`Should return not idle time`, async () => {
+      session.start();
+      await new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+      });
+      assert.equal(session.getSessionDuration()[1] >= 1000, true);
     });
   });
   suite(`Session processes`, () => {
@@ -33,16 +47,28 @@ suite(`Session`, () => {
     beforeEach(() => {
       session.start();
     });
-    test(`Session started`, () => {
+    test(`Session should start`, () => {
       assert.equal(session.sessionState, SessionState.Ongoing);
     });
-    test(`Session is idle`, () => {
+    test(`Session should be idle`, () => {
       session.idle();
       assert.equal(session.sessionState, SessionState.Idle);
     });
-    test(`Session ended`, () => {
+    test(`Session should ended`, () => {
       session.end();
       assert.equal(session.sessionState, SessionState.Ended);
+    });
+    test(`Session should return all data`, async () => {
+      session.idle();
+      await new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+      });
+      const info = session.getSessionInfo();
+      assert.equal(info.duration > 0, true);
+      assert.equal(info.idle > 0, true);
+      assert.equal(info.duration !== info.idle, true);
+      assert.equal(info.state, SessionState.Idle);
+      assert.equal(info.id != "", true);
     });
   });
 });

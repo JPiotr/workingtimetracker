@@ -1,3 +1,7 @@
+import { ActionType } from "../core/ActionType";
+import { IEnumData } from "../core/Data/IEnumData";
+import { SessionState } from "../core/Sessions/SessionState";
+
 /**
  * Helps convert string to time in ms
  * @param value - Time in format "00:00:00"
@@ -38,6 +42,27 @@ export function convertTimeToString(value: number): string {
     ":" +
     padTo2Digits(seconds)
   );
+}
+
+export function getActionTypeConfig(): IEnumData {
+  return {
+    name: "ActionType",
+    values: [
+      ActionType.Building,
+      ActionType.Codding,
+      ActionType.Debugging,
+      ActionType.Documenting,
+      ActionType.Idle,
+      ActionType.Testing,
+    ],
+  };
+}
+
+export function getSessionStateConfig(): IEnumData {
+  return {
+    name: "SessionState",
+    values: [SessionState.Ongoing, SessionState.Idle, SessionState.Ended],
+  };
 }
 
 function padTo2Digits(num: number): string {
