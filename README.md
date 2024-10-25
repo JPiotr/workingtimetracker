@@ -27,7 +27,7 @@ Extension detect what You are doing in Your project and decides if You are coddi
 
 ### Workspaces support
 
-You are working on many workspaces at the same time, now it will detect that and create new file for every workspace. 📚
+You are working on many workspaces at the same time - now it will detect that and create new file for every workspace. 📚
 
 ### User data
 
