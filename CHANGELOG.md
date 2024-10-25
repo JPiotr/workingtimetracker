@@ -8,6 +8,12 @@ All notable changes to the "workingtimetracker" extension will be documented in 
 - v1.2 - Detect on witch type of files user is working (analize and store only files extensions)
 - v1.2 - Add visualization tool
 
+## [1.1.1] - 2024 - 10 - 25
+
+### Changed 
+
+- Readme 🫠
+
 ## [1.1.0] - 2024 - 10 - 25
 
 ### Changed
