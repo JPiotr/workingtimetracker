@@ -67,7 +67,7 @@ export class SessionManager {
   }
   getCurrentlyManagedSessions(): ISessionDataRow[] {
     return [
-      ...this.getManagedSessions(),
+      ...this.managedSessions,
       {
         sessionInfo: this.currentSession.getSessionInfo(),
         actionType: this.currentAction,
@@ -86,9 +86,6 @@ export class SessionManager {
       lastNotStoppedSession.actionType = ActionType.Stop;
     }
     this.managedSessions = sessions;
-  }
-  private getManagedSessions(): ISessionDataRow[] {
-    return this.managedSessions;
   }
   private createNewSession(actionType: ActionType): void {
     if (
