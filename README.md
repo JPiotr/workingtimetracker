@@ -62,11 +62,11 @@ This extension contributes the following settings:
 
 ## Todo
 
+Some of todo's are in changelog file.
+
 - [ ] Add some logo
 - [ ] Create more tests
 - [x] Migrate hardcoded file extensions to configuration
-- [ ] Visualization tool - in progress
-- [ ] Determine on witch branch user is working
 
 ## Known Issues
 
