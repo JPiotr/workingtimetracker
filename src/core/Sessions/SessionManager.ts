@@ -1,13 +1,13 @@
 import { ISessionDataRow } from "./ISessionDataRow";
 import { ActionType } from "../ActionType";
 import { Session } from "./Session";
+import { DataStorageManager } from "../Data/DataStorageManager";
 
 export class SessionManager {
   private static instance: SessionManager;
   private currentSession: Session;
   private oldSession!: Session;
   private currentAction: ActionType = ActionType.Idle;
-  private managedSessions: ISessionDataRow[] = [];
 
   static getInstance(): SessionManager {
     if (this.instance === undefined) {
@@ -65,27 +65,14 @@ export class SessionManager {
       actionType: this.currentAction,
     };
   }
-  getCurrentlyManagedSessions(): ISessionDataRow[] {
-    return [
-      ...this.managedSessions,
-      {
+  getCurrentlyManagedSession(): ISessionDataRow {
+    return {
         sessionInfo: this.currentSession.getSessionInfo(),
         actionType: this.currentAction,
-      },
-    ];
+      };
   }
-  loadManagedSessions(sessions: ISessionDataRow[]): void {
-    if (!sessions.every((x) => x.sessionInfo.durations.length !== 0)) {
-      sessions = sessions.filter((x) => x.sessionInfo.durations.length !== 0);
-    }
-    if (
-      sessions.length > 0 &&
-      sessions[sessions.length - 1].actionType !== ActionType.Stop
-    ) {
-      const lastNotStoppedSession = sessions[sessions.length - 1];
-      lastNotStoppedSession.actionType = ActionType.Stop;
-    }
-    this.managedSessions = sessions;
+  resetSessionsInfo() : void {
+    this.currentSession = new Session();
   }
   private createNewSession(actionType: ActionType): void {
     if (
@@ -101,7 +88,7 @@ export class SessionManager {
     this.currentAction = actionType;
   }
   private saveSession(): void {
-    this.managedSessions.push({
+    DataStorageManager.getInstance().saveSession({
       sessionInfo: this.currentSession.getSessionInfo(),
       actionType: this.currentAction,
     });
