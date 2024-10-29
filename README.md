@@ -68,7 +68,7 @@ This extension contributes the following settings:
 
 Some of todo's are in changelog file.
 
-- [ ] Add some logo
+- [x] Add some logo
 - [ ] Create more tests
 - [x] Migrate hardcoded file extensions to configuration
 

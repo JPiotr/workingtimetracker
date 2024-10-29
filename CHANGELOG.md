@@ -5,8 +5,23 @@ All notable changes to the "workingtimetracker" extension will be documented in 
 ## [Unreleased]
 
 - v1.2 - Detect on witch branch user is working
-- v1.2 - Detect on witch type of files user is working (analize and store only files extensions)
+- v1.2 - Detect on witch type of files user is working (analize and store only files extensions) - optional
 - v1.2 - Add visualization tool
+
+## [1.1.2] - 2024 - 10 - 29
+
+### Added
+
+- Extension icon
+
+### Changed
+
+- Readme
+
+### Fixed
+
+- Multiple workspaces handle
+- Data loading (previously there was to much data loaded to RAM)
 
 ## [1.1.1] - 2024 - 10 - 25
 
@@ -16,14 +31,6 @@ All notable changes to the "workingtimetracker" extension will be documented in 
 
 ## [1.1.0] - 2024 - 10 - 25
 
-### Changed
-
-- Location of time presenting in status bar to the left side
-- Configuration in ms to minutes
-- When editing or focused on workingtimetracker file extension will assume that user is idle
-- Option for showing time with idle in status bar now defines only ui behavior
-- Duration with idle time and without are separated in file
-
 ### Added
 
 - New extension configuration options
@@ -32,6 +39,14 @@ All notable changes to the "workingtimetracker" extension will be documented in 
 - Detecting editing files with `test` in their name as Testing
 - Store extension enums values in file
 - Store part of user config
+
+### Changed
+
+- Location of time presenting in status bar to the left side
+- Configuration in ms to minutes
+- When editing or focused on workingtimetracker file extension will assume that user is idle
+- Option for showing time with idle in status bar now defines only ui behavior
+- Duration with idle time and without are separated in file
 
 ### Fixed
 
