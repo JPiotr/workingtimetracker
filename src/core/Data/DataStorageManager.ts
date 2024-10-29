@@ -24,10 +24,6 @@ export class DataStorageManager implements IDataStorage {
     if (this.instance === undefined) {
       this.instance = new DataStorageManager();
     }
-    DataStorageManager.currentWorkspace =
-      vscode.workspace.workspaceFolders === undefined
-        ? undefined
-        : vscode.workspace.workspaceFolders[0].uri;
     this.instance.updateFilePath();
     this.instance.today = new Date(Date.now()).toLocaleString(
       Intl.Locale.name,
@@ -150,7 +146,7 @@ export class DataStorageManager implements IDataStorage {
       return new Promise<void>((resolve, reject) => {
         this.checkFilePath()
           .then(() => {
-            return this.readFile()
+            return this.readFile();
           })
           .then((bytes: Uint8Array) => {
             return JSON.parse(Buffer.from(bytes).toString("utf-8"));
@@ -197,7 +193,7 @@ export class DataStorageManager implements IDataStorage {
                   config: {
                     showIdle:
                       vscode.workspace.getConfiguration("workingtimetracker")
-                        .innerSessions.showIdle
+                        .innerSessions.showIdle,
                   },
                   user: sUserData.user,
                   dailySessions: [
@@ -220,7 +216,9 @@ export class DataStorageManager implements IDataStorage {
           })
           .then(
             () => {
-              vscode.window.showInformationMessage(`Data saved succesfully in workspace ${DataStorageManager.currentWorkspace}.`);
+              vscode.window.showInformationMessage(
+                `Data saved succesfully in workspace ${DataStorageManager.currentWorkspace}.`
+              );
               resolve();
             },
             (reason: string) => {
@@ -244,7 +242,9 @@ export class DataStorageManager implements IDataStorage {
   }
   loadTodaySessions(sessions: ISessionDataRow[]) {
     if (!sessions.every((x) => x.sessionInfo.idle !== 0)) {
-      sessions = sessions.filter((x) => x.sessionInfo.durations.length > 0 && x.sessionInfo.idle > 0);
+      sessions = sessions.filter(
+        (x) => x.sessionInfo.durations.length > 0 && x.sessionInfo.idle > 0
+      );
     }
     if (
       sessions.length > 0 &&
@@ -312,18 +312,22 @@ export class DataStorageManager implements IDataStorage {
       reject(`Cannot find data for ${this.today} (today).`);
     });
   }
-  private readFile() : Promise<Uint8Array>{
-    return new Promise<Uint8Array>((resolve,rejects)=>{
-      vscode.workspace.fs.readFile(
-        vscode.Uri.parse(this.filePath)
-      ).then((value)=>{
-        if(value.length == 0){
-          rejects(`There is no data to load.`)
+  resetStorage() {
+    this.todaySessions = [];
+  }
+  private readFile(): Promise<Uint8Array> {
+    return new Promise<Uint8Array>((resolve, rejects) => {
+      vscode.workspace.fs.readFile(vscode.Uri.parse(this.filePath)).then(
+        (value) => {
+          if (value.length == 0) {
+            rejects(`There is no data to load.`);
+          }
+          resolve(value);
+        },
+        (err) => {
+          rejects(err);
         }
-        resolve(value);
-      },(err)=>{
-        rejects(err);
-      });
+      );
     });
   }
 }

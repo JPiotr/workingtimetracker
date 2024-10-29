@@ -41,8 +41,8 @@ export function activate(context: vscode.ExtensionContext) {
       SessionManager.getInstance().menageSession(ActionType.Idle);
       newly = false;
     }),
-    vscode.commands.registerCommand(COMMAND_SAVE, () => {
-      DataStorageManager.getInstance().saveData();
+    vscode.commands.registerCommand(COMMAND_SAVE, async () => {
+      await DataStorageManager.getInstance().saveData();
     }),
     vscode.workspace.onDidChangeConfiguration(() => {
       const newConfig = vscode.workspace.getConfiguration("workingtimetracker");
@@ -109,7 +109,7 @@ export function activate(context: vscode.ExtensionContext) {
       BehaviorDetector.getInstance().idleUser();
     }
   });
-  DataStorageManager.getInstance().loadData();
+  DataStorageManager.getInstance().loadData().then(()=>{}).catch((err)=>{console.log(err)});
   autoSaveSubsciption = autoSave.subscribe(() => {
     if (config.innerSessions.autoSave && !newly) {
       DataStorageManager.getInstance().saveData();
