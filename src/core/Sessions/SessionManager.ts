@@ -19,6 +19,8 @@ export class SessionManager {
     this.currentSession = new Session();
   }
   menageSession(actionType: ActionType): ISessionDataRow {
+    
+    const oldAction : ActionType = this.currentAction;
     switch (actionType) {
       case ActionType.Codding:
       case ActionType.Debugging:
@@ -45,7 +47,7 @@ export class SessionManager {
         this.currentSession = new Session();
         this.currentAction = actionType;
         return {
-          actionType: this.currentAction,
+          actionType: oldAction,
           sessionInfo: this.oldSession.getSessionInfo(),
         };
     }
