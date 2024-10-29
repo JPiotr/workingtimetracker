@@ -177,13 +177,23 @@ export class BehaviorDetector implements IBehaviorDetector {
     ];
   }
   detectWorkspaceChanged(): vscode.Disposable[] {
+    //fixme Trzeba to naprawic
     return [
       vscode.window.onDidChangeActiveTextEditor((e) => {
         if (e !== undefined) {
-          const newUri = vscode.Uri.parse(e?.document.uri.path);
-          if (DataStorageManager.currentWorkspace !== newUri) {
-            DataStorageManager.currentWorkspace = newUri;
+          const newUri = vscode.Uri.parse(e.document.uri.path);
+          const folder = vscode.workspace.getWorkspaceFolder(newUri);
+          if(folder != undefined && DataStorageManager.currentWorkspace !== folder.uri){
+            SessionManager.getInstance().menageSession(ActionType.Stop);
+            DataStorageManager.getInstance().saveData().then(()=>{
+              SessionManager.getInstance().resetSessionsInfo();
+              DataStorageManager.currentWorkspace = folder.uri;
+              DataStorageManager.getInstance().updateFilePath();
+              DataStorageManager.getInstance().resetStorage()
+              return DataStorageManager.getInstance().loadData();
+            }).then(()=>{}).catch((err)=>{vscode.window.showErrorMessage(err)});
           }
+          return;
         }
       }),
     ];

@@ -64,19 +64,17 @@ This extension contributes the following settings:
 * `workingtimetracker.behaviorDetector.doumentationFilesExt`: Array of files extension that are involved in creating documentation.
 * `workingtimetracker.behaviorDetector.detectTestingWhileEditingTestFile`: Defines if You want detector to detect editing file with `test` in ther name to be treat as testing.
 
-## Todo
-
-Some of todo's are in changelog file.
-
-- [ ] Add some logo
-- [ ] Create more tests
-- [x] Migrate hardcoded file extensions to configuration
-
 ## Known Issues
 
 Feel free to create some!
 
 ## Release Notes
+
+### 1.1.2
+
+There was some bugs fixes and icon was added also performace was improved. 
+More info traditionaly in changelog 🫡.
+
 
 ### 1.1.0
 

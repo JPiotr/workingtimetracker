@@ -4,6 +4,12 @@
   "description": "Tracker for time spending on projects.",
   "version": "1.1.1",
   "publisher": "Oblitus",
+  "license": "See license in LICENSE",
+  "icon": "images/logo.png",
+  "galleryBanner": {
+    "color": "#8a8a8a",
+    "theme": "dark"
+  },
   "author": {
     "name": "JPiotr",
     "url": "https://github.com/JPiotr"
@@ -17,6 +23,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/JPiotr/workingtimetracker"
+  },
+  "bugs": {
+    "url": "https://github.com/JPiotr/workingtimetracker/issues"
   },
   "activationEvents": [
     "onStartupFinished"
@@ -57,12 +66,16 @@
           "description": "Saved sessions filename."
         },
         "workingtimetracker.behaviorDetector.doumentationFilesExt": {
-          "type":"array",
-          "default": [".txt",".json",".md"],
+          "type": "array",
+          "default": [
+            ".txt",
+            ".json",
+            ".md"
+          ],
           "description": "Files that are used to create documentation"
         },
         "workingtimetracker.behaviorDetector.detectTestingWhileEditingTestFile": {
-          "type":"boolean",
+          "type": "boolean",
           "default": true,
           "description": "Defines if You want detector to detect if You editing files with 'test' in their name"
         }
