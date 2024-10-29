@@ -2,7 +2,7 @@
   "name": "workingtimetracker",
   "displayName": "Working Time Tracker",
   "description": "Tracker for time spending on projects.",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "publisher": "Oblitus",
   "license": "See license in LICENSE",
   "icon": "images/logo.png",
