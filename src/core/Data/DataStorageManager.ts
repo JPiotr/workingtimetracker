@@ -60,10 +60,10 @@ export class DataStorageManager implements IDataStorage {
           return this.findUserDataInfo(data);
         })
         .then((userData) => {
-          this.dataLoaded = true;
           return this.findTodaysSessions(userData);
         })
         .then((sessions) => {
+          this.dataLoaded = true;
           vscode.window.showInformationMessage(
             `Data of ${this.today} for ${this.currentUser} loaded sucessfully.`
           );
@@ -72,8 +72,8 @@ export class DataStorageManager implements IDataStorage {
         })
         .catch((err) => {
           vscode.window.showErrorMessage(err);
+          this.dataLoaded = false;
           if (err === `There is no required file!`) {
-            this.dataLoaded = false;
             this.createNewFile()
               .then((msg) => {
                 vscode.window.showInformationMessage(msg);
@@ -95,6 +95,20 @@ export class DataStorageManager implements IDataStorage {
       return new Promise<void>((resolve, reject) => {
         this.checkFilePath()
           .then(() => {
+            return this.readFile();
+          })
+          .then((bytes: Uint8Array) => {
+            return JSON.parse(Buffer.from(bytes).toString("utf-8"));
+          })
+          .then((data: IData) => {
+            sData = data;
+            return this.findUserDataInfo(data);
+          })
+          .then((userData) => {
+            let sessions : IDailySessions[] = [];
+            if(userData.dailySessions !== undefined && userData.dailySessions.length !== 0){
+              sessions = userData.dailySessions.filter(x=>x.date !== this.today);
+            }
             let temp: ISessionDataRow[] = [];
             if (this.todaySessions.length > 0) {
               temp = [
@@ -117,7 +131,7 @@ export class DataStorageManager implements IDataStorage {
                     vscode.workspace.getConfiguration("workingtimetracker")
                       .innerSessions.showIdle,
                   user: this.currentUser,
-                  dailySessions: [
+                  dailySessions: [...sessions,
                     {
                       date: this.today,
                       sessions: temp,
