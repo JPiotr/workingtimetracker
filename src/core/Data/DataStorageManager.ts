@@ -60,6 +60,7 @@ export class DataStorageManager implements IDataStorage {
           return this.findUserDataInfo(data);
         })
         .then((userData) => {
+          this.dataLoaded = true;
           return this.findTodaysSessions(userData);
         })
         .then((sessions) => {
@@ -67,7 +68,6 @@ export class DataStorageManager implements IDataStorage {
             `Data of ${this.today} for ${this.currentUser} loaded sucessfully.`
           );
           this.loadTodaySessions(sessions.sessions);
-          this.dataLoaded = true;
           resolve();
         })
         .catch((err) => {
