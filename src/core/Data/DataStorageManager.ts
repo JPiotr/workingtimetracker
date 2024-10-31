@@ -71,9 +71,9 @@ export class DataStorageManager implements IDataStorage {
           resolve();
         })
         .catch((err) => {
-          this.dataLoaded = false;
           vscode.window.showErrorMessage(err);
           if (err === `There is no required file!`) {
+            this.dataLoaded = false;
             this.createNewFile()
               .then((msg) => {
                 vscode.window.showInformationMessage(msg);
