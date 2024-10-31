@@ -8,6 +8,12 @@ All notable changes to the "workingtimetracker" extension will be documented in 
 - v1.2 - Detect on witch type of files user is working (analize and store only files extensions) - optional
 - v1.2 - Add visualization tool
 
+## [1.1.3] - 2024 - 10 - 31
+
+### Fixed
+
+- #6 Overriding of daily sessions in file.
+
 ## [1.1.2] - 2024 - 10 - 29
 
 ### Added
