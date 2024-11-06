@@ -7,6 +7,7 @@ All notable changes to the "workingtimetracker" extension will be documented in 
 - v1.2 - Detect on witch branch user is working
 - v1.2 - Detect on witch type of files user is working (analize and store only files extensions) - optional
 - v1.2 - Add visualization tool
+- v1.2 - Add config for autostart of extension (solving issue with .workingtime file conflicts when fetching from git)
 
 ## [1.1.3] - 2024 - 10 - 31
 
@@ -41,7 +42,7 @@ All notable changes to the "workingtimetracker" extension will be documented in 
 
 - New extension configuration options
     - Documentation files extension that are analized to detect Documentation action
-    - Decide if editing files with `test` in theri name is also Testing action
+    - Decide if editing files with `test` in their name is also Testing action
 - Detecting editing files with `test` in their name as Testing
 - Store extension enums values in file
 - Store part of user config

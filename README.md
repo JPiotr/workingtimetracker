@@ -10,20 +10,20 @@ This is extension for You!
 
 ### Time register
 
-Working Time Tracker, tracks time You spend on your programing project. All Your data is stored direcrly in Your workspace. 
+Working Time Tracker, tracks time You spend on your programming project. All Your data is stored direcrly in Your workspace. 
 
 It can register:
 
 * Codding time 💻
 * Debugging time 🪱
-* Time spend on creating documentation in files like .md, .txt, .json 🗃️
+* Time spend on creating documentation in files like .md, .txt, .json  (witch is also configurable) 🗃️
 * Testing time 🤖
 * Building Your projects 🔨
 * Idle time 😪
 
 ### Behavior detector
 
-Extension detect what You are doing in Your project and decides if You are codding or You are afk on some coffie ☕.
+Extension detect what You are doing in Your project and decides if You are codding or You are away on some coffie ☕.
 
 ### Workspaces support
 
@@ -37,9 +37,9 @@ If You don't want to allow this extension to get Your data from github, don't wo
 
 ### Mutli user support
 
-You are a team player? A lot of codders, and testers work on Your project? 🙋
+You are a team player? A lot of codders and testers work on Your project? 🙋
 
-Extension can store working time of every person, and it will load only Your data to the memory. 
+Extension can store working time of every person and it will load only Your data to the memory. 
 
 
 ### Autosave
@@ -48,7 +48,7 @@ If You want it can autosave stored data in determined intervals. 💾
 
 ### Visualization
 
-You have Your data stored, but how to read it? 
+You have Your data stored but how to read it? 
 Coming soon!
 
 ## Extension Settings
@@ -56,13 +56,13 @@ Coming soon!
 This extension contributes the following settings:
 
 * `workingtimetracker.innerSessions.registerIdle`: It defines if You want to see time sumarize with idle on status bar. 
-* `workingtimetracker.innerSessions.uiRefreshTime`: Defines how ofen ui should refresh in ms.
+* `workingtimetracker.innerSessions.uiRefreshTime`: Defines how ofen UI should refresh in ms.
 * `workingtimetracker.innerSessions.autoSave`: Defines if You want autosave.
-* `workingtimetracker.innerSessions.autoSaveTime`: Auto save interval in ms, default 15min.
-* `workingtimetracker.innerSessions.idleTime`: Idle detection interval in ms, default 5min.
+* `workingtimetracker.innerSessions.autoSaveTime`: Auto save interval in minutes, default 15min.
+* `workingtimetracker.innerSessions.idleTime`: Idle detection interval in minutes, default 5min.
 * `workingtimetracker.fileName`: Saved sessions filename.
 * `workingtimetracker.behaviorDetector.doumentationFilesExt`: Array of files extension that are involved in creating documentation.
-* `workingtimetracker.behaviorDetector.detectTestingWhileEditingTestFile`: Defines if You want detector to detect editing file with `test` in ther name to be treat as testing.
+* `workingtimetracker.behaviorDetector.detectTestingWhileEditingTestFile`: Defines if You want detector to treat editing file with `test` in their name to be in testing category.
 
 ## Known Issues
 
