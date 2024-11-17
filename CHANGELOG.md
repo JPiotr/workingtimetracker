@@ -13,7 +13,7 @@ All notable changes to the "workingtimetracker" extension will be documented in 
 
 ### Changed 
 
-- Changed format of saving dates for vizualizaton purpuses, old files created by extension will not work with upcoming visualization tool. 
+- Changed format of saving dates for vizualizaton purposes, old files created by extension will not work with upcoming visualization tool. 
 
 ## [1.1.3] - 2024 - 10 - 31
 
