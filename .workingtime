@@ -1,0 +1,66 @@
+{
+    "extConfig": {
+        "enums": [
+            {
+                "name": "ActionType",
+                "values": [
+                    "Building",
+                    "Codding",
+                    "Debugging",
+                    "Documenting",
+                    "Idle",
+                    "Testing"
+                ]
+            },
+            {
+                "name": "SessionState",
+                "values": [
+                    "Ongoing",
+                    "Idle",
+                    "Ended"
+                ]
+            }
+        ]
+    },
+    "data": [
+        {
+            "config": true,
+            "user": "JPiotr",
+            "dailySessions": [
+                {
+                    "date": "Sun Nov 17 2024",
+                    "sessions": [
+                        {
+                            "sessionInfo": {
+                                "id": "69006fbc-1b86-4c7e-9568-00cf70f12a63",
+                                "duration": 0,
+                                "idle": 0,
+                                "state": "Ended",
+                                "durations": [
+                                    {
+                                        "id": "a44ebe28-212a-4edd-b188-ffee2304ce59",
+                                        "state": "Ongoing",
+                                        "begin": 1731853476061,
+                                        "end": 1731853476348,
+                                        "duration": 287
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "56b982f1-46f0-4aab-b2d0-0939e31bd2b0",
+                                "duration": 0,
+                                "idle": 0,
+                                "state": "Idle",
+                                "durations": []
+                            },
+                            "actionType": "Stop"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
