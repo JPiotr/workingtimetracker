@@ -9,6 +9,12 @@ All notable changes to the "workingtimetracker" extension will be documented in 
 - v1.2 - Add visualization tool
 - v1.2 - Add config for autostart of extension (solving issue with .workingtime file conflicts when fetching from git)
 
+## [1.1.5] - 2024 - 11 - 17
+
+## Fixed
+
+- Data not saving when no file is presented
+
 ## [1.1.4] - 2024 - 11 - 17
 
 ### Changed 

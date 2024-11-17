@@ -97,15 +97,21 @@ export class DataStorageManager implements IDataStorage {
             return this.readFile();
           })
           .then((bytes: Uint8Array) => {
+            if(bytes.length == 0){
+              return null;
+            }
             return JSON.parse(Buffer.from(bytes).toString("utf-8"));
           })
-          .then((data: IData) => {
-            sData = data;
-            return this.findUserDataInfo(data);
+          .then((data: IData | null) => {
+            if(data !== null){
+              sData = data;
+              return this.findUserDataInfo(data);
+            }
+            return undefined;
           })
           .then((userData) => {
             let sessions : IDailySessions[] = [];
-            if(userData.dailySessions !== undefined && userData.dailySessions.length !== 0){
+            if(userData !== undefined && userData.dailySessions !== undefined && userData.dailySessions.length !== 0){
               sessions = userData.dailySessions.filter(x=>x.date !== this.today.toDateString());
             }
             let temp: ISessionDataRow[] = [];
@@ -332,9 +338,6 @@ export class DataStorageManager implements IDataStorage {
     return new Promise<Uint8Array>((resolve, rejects) => {
       vscode.workspace.fs.readFile(vscode.Uri.parse(this.filePath)).then(
         (value) => {
-          if (value.length == 0) {
-            rejects(`There is no data to load.`);
-          }
           resolve(value);
         },
         (err) => {
