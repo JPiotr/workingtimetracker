@@ -16,7 +16,7 @@ export class DataStorageManager implements IDataStorage {
   private userInfoGetter = new UserInfoGetter();
   private filePath: string = "";
   private currentUser: string = this.userInfoGetter.username;
-  private today!: string;
+  private today!: Date;
   private todaySessions: ISessionDataRow[] = [];
   private dataLoaded: boolean = false;
 
@@ -25,10 +25,7 @@ export class DataStorageManager implements IDataStorage {
       this.instance = new DataStorageManager();
     }
     this.instance.updateFilePath();
-    this.instance.today = new Date(Date.now()).toLocaleString(
-      Intl.Locale.name,
-      { day: "numeric", month: "numeric", year: "numeric" }
-    );
+    this.instance.today = new Date(Date.now());
     return this.instance;
   }
   private constructor() {
@@ -65,7 +62,9 @@ export class DataStorageManager implements IDataStorage {
         .then((sessions) => {
           this.dataLoaded = true;
           vscode.window.showInformationMessage(
-            `Data of ${this.today} for ${this.currentUser} loaded sucessfully.`
+            `Data of ${this.today.toLocaleDateString()} for ${
+              this.currentUser
+            } loaded sucessfully.`
           );
           this.loadTodaySessions(sessions.sessions);
           resolve();
@@ -107,7 +106,7 @@ export class DataStorageManager implements IDataStorage {
           .then((userData) => {
             let sessions : IDailySessions[] = [];
             if(userData.dailySessions !== undefined && userData.dailySessions.length !== 0){
-              sessions = userData.dailySessions.filter(x=>x.date !== this.today);
+              sessions = userData.dailySessions.filter(x=>x.date !== this.today.toDateString());
             }
             let temp: ISessionDataRow[] = [];
             if (this.todaySessions.length > 0) {
@@ -133,7 +132,7 @@ export class DataStorageManager implements IDataStorage {
                   user: this.currentUser,
                   dailySessions: [...sessions,
                     {
-                      date: this.today,
+                      date: this.today.toDateString(),
                       sessions: temp,
                     },
                   ],
@@ -189,7 +188,7 @@ export class DataStorageManager implements IDataStorage {
             const temp2: IDailySessions[] = [];
             if (sUserData.dailySessions.length > 1) {
               sUserData.dailySessions.forEach((x) => {
-                if (x.date !== this.today) {
+                if (x.date !== this.today.toDateString()) {
                   temp2.push(x);
                 }
               });
@@ -213,7 +212,7 @@ export class DataStorageManager implements IDataStorage {
                   dailySessions: [
                     ...temp2,
                     {
-                      date: this.today,
+                      date: this.today.toDateString(),
                       sessions: [
                         ...sessions,
                         SessionManager.getInstance().getCurrentlyManagedSession(),
@@ -319,11 +318,11 @@ export class DataStorageManager implements IDataStorage {
   }
   private findTodaysSessions(userData: IUserData): Promise<IDailySessions> {
     return new Promise<IDailySessions>((resolve, reject) => {
-      const temp = userData.dailySessions.find((x) => x.date === this.today);
+      const temp = userData.dailySessions.find((x) => x.date === this.today.toDateString());
       if (temp !== undefined) {
         resolve(temp);
       }
-      reject(`Cannot find data for ${this.today} (today).`);
+      reject(`Cannot find data for ${this.today.toLocaleDateString()} (today).`);
     });
   }
   resetStorage() {
