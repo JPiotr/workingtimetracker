@@ -40,12 +40,14 @@ export class BehaviorDetector implements IBehaviorDetector {
         this.setNewAction(ActionType.Idle);
       }),
       vscode.window.onDidChangeWindowState((e) => {
-        if (e.focused) {
-          this.isIdle = false;
-        } else {
-          this.isIdle = true;
-          this.lastDetectedAction = this.currentAction;
-          this.currentAction = ActionType.Idle;
+        if (this.config.behaviorDetector.idleWhenLostFocus){
+          if (e.focused) {
+            this.isIdle = false;
+          } else {
+            this.isIdle = true;
+            this.lastDetectedAction = this.currentAction;
+            this.currentAction = ActionType.Idle;  
+          }
         }
         this.invokeManager();
       }),
@@ -177,7 +179,6 @@ export class BehaviorDetector implements IBehaviorDetector {
     ];
   }
   detectWorkspaceChanged(): vscode.Disposable[] {
-    //fixme Trzeba to naprawic
     return [
       vscode.window.onDidChangeActiveTextEditor((e) => {
         if (e !== undefined) {

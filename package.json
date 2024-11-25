@@ -2,7 +2,7 @@
   "name": "workingtimetracker",
   "displayName": "Working Time Tracker",
   "description": "Tracker for time spending on projects.",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "publisher": "Oblitus",
   "license": "See license in LICENSE",
   "icon": "images/logo.png",
@@ -78,6 +78,11 @@
           "type": "boolean",
           "default": true,
           "description": "Defines if You want detector to detect if You editing files with 'test' in their name"
+        },
+        "workingtimetracker.behaviorDetector.idleWhenLostFocus": {
+          "type":"boolean",
+          "default": true,
+          "description": "Defines if You want detector to assume losing focus vscode as idle time."
         }
       }
     },
