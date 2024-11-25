@@ -179,7 +179,6 @@ export class BehaviorDetector implements IBehaviorDetector {
     ];
   }
   detectWorkspaceChanged(): vscode.Disposable[] {
-    //fixme Trzeba to naprawic
     return [
       vscode.window.onDidChangeActiveTextEditor((e) => {
         if (e !== undefined) {
