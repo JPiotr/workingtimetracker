@@ -78,6 +78,11 @@
           "type": "boolean",
           "default": true,
           "description": "Defines if You want detector to detect if You editing files with 'test' in their name"
+        },
+        "workingtimetracker.behaviorDetector.idleWhenLostFocus": {
+          "type":"boolean",
+          "default": true,
+          "description": "Defines if You want detector to assume losing focus vscode as idle time."
         }
       }
     },
