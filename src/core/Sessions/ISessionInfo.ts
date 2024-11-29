@@ -7,4 +7,5 @@ export interface ISessionInfo {
   idle : number;
   state: SessionState;
   durations: ISessionDurationInfo[];
+  filesExt? : string[];
 }
