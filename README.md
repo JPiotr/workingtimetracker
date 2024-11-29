@@ -63,12 +63,18 @@ This extension contributes the following settings:
 * `workingtimetracker.fileName`: Saved sessions filename.
 * `workingtimetracker.behaviorDetector.doumentationFilesExt`: Array of files extension that are involved in creating documentation.
 * `workingtimetracker.behaviorDetector.detectTestingWhileEditingTestFile`: Defines if You want detector to treat editing file with `test` in their name to be in testing category.
+* `workingtimetracker.behaviorDetector.idleWhenLostFocus`: Defines if You want detector to assume losing focus vscode as idle time.
 
 ## Known Issues
 
 Feel free to create some!
 
 ## Release Notes
+
+### 1.2.0
+
+New relase is out! 
+Look at the changelog file for more details!
 
 ### 1.1.2
 
