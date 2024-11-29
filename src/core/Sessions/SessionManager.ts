@@ -18,6 +18,9 @@ export class SessionManager {
   private constructor() {
     this.currentSession = new Session();
   }
+  registerFileExt(ext : string){
+    this.currentSession.addNewFileExtInfo(ext);
+  }
   menageSession(actionType: ActionType): ISessionDataRow {
     
     const oldAction : ActionType = this.currentAction;

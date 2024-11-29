@@ -9,6 +9,7 @@ export class Session {
   private _newSession: boolean;
   private _sessionsChain!: Node<SessionDuration>;
   sessionState: SessionState = SessionState.Idle;
+  private _filesExt : string[] = [];
 
   constructor() {
     this._id = crypto.randomUUID();
@@ -99,10 +100,17 @@ export class Session {
       idle: duration[1],
       state: this.sessionState,
       durations: durations,
+      filesExt: this._filesExt
     };
   }
 
   isNewSession(): boolean {
     return this._newSession;
+  }
+
+  addNewFileExtInfo(ext: string){
+    if(!this._filesExt.includes(ext)){
+      this._filesExt.push(ext);
+    }
   }
 }

@@ -49,7 +49,9 @@ If You want it can autosave stored data in determined intervals. 💾
 ### Visualization
 
 You have Your data stored but how to read it? 
-Coming soon!
+Here is [visualization tool](https://jpiotr.github.io/workingtimetracker_ui/) for You! 
+
+![visualization tool](images/visualizationTool.png) 
 
 ## Extension Settings
 
@@ -63,12 +65,18 @@ This extension contributes the following settings:
 * `workingtimetracker.fileName`: Saved sessions filename.
 * `workingtimetracker.behaviorDetector.doumentationFilesExt`: Array of files extension that are involved in creating documentation.
 * `workingtimetracker.behaviorDetector.detectTestingWhileEditingTestFile`: Defines if You want detector to treat editing file with `test` in their name to be in testing category.
+* `workingtimetracker.behaviorDetector.idleWhenLostFocus`: Defines if You want detector to assume losing focus vscode as idle time.
 
 ## Known Issues
 
 Feel free to create some!
 
 ## Release Notes
+
+### 1.2.0
+
+New relase is out! 
+Look at the changelog file for more details!
 
 ### 1.1.2
 

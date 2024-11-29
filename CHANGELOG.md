@@ -4,10 +4,20 @@ All notable changes to the "workingtimetracker" extension will be documented in 
 
 ## [Unreleased]
 
-- v1.2 - Detect on witch branch user is working
-- v1.2 - Detect on witch type of files user is working (analize and store only files extensions) - optional
-- v1.2 - Add visualization tool
-- v1.2 - Add config for autostart of extension (solving issue with .workingtime file conflicts when fetching from git)
+- v1.3 - Detect on which branch user is working
+
+## [1.2.0]
+
+### Changed 
+
+- Detecting actions now are under two event listeners
+- Extendion Icon
+
+## Added
+
+- Option to decide if losing focus of vscode should be interpreted as Idle
+- Visualization tool
+- Store files extension under session information
 
 ## [1.1.5] - 2024 - 11 - 17
 
