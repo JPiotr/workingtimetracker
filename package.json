@@ -2,14 +2,17 @@
   "name": "workingtimetracker",
   "displayName": "Working Time Tracker",
   "description": "Tracker for time spending on projects.",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "publisher": "Oblitus",
   "license": "See license in LICENSE",
   "icon": "images/logo.png",
   "galleryBanner": {
-    "color": "#8a8a8a",
+    "color": "#201f25",
     "theme": "dark"
   },
+  "keywords": [
+    "time", "time tracking","working time"
+  ],
   "author": {
     "name": "JPiotr",
     "url": "https://github.com/JPiotr"
