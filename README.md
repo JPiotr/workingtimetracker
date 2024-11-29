@@ -49,7 +49,9 @@ If You want it can autosave stored data in determined intervals. 💾
 ### Visualization
 
 You have Your data stored but how to read it? 
-Coming soon!
+Here is [visualization tool](https://jpiotr.github.io/workingtimetracker_ui/) for You! 
+
+![visualization tool](images/visualizationTool.png) 
 
 ## Extension Settings
 
