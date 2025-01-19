@@ -53,6 +53,9 @@ Here is [visualization tool](https://jpiotr.github.io/workingtimetracker_ui/) fo
 
 ![visualization tool](images/visualizationTool.png) 
 
+And [CLI visualization tool](https://github.com/JPiotr/WTTCLIVisualizer)!
+
+![cli visualization tool](images/cliVisualizationTool.png)
 ## Extension Settings
 
 This extension contributes the following settings:
